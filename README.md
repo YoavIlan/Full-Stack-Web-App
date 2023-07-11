@@ -1,2 +1,2 @@
-# adap
-MSITM Summer 23 ADAP project
+# apad
+MSITM Summer 23 APAD project
