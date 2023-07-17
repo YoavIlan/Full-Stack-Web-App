@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 
-cred = credentials.Certificate("apad-summer-23-firebase-adminsdk-l6p99-ed2d97db75.json")
+cred = credentials.Certificate("apad-summer-23-firebase-adminsdk-l6p99-717728625b.json")
 fb_app = firebase_admin.initialize_app(cred)
 
 #users route
