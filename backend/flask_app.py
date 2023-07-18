@@ -35,14 +35,12 @@ def get_user(email, password):
         password_encrypt = str(uuid.uuid5(uuid.NAMESPACE_URL, password))
         
         # get the document with the email id
-        try:
-            users_collection.find({'email': email_encrypt, 'password': password_encrypt})[0]
-        # username found in db
-            return jsonify({"success": True}), 200
-        except Exception as e:
+        result = users_collection.find_one({'email': email_encrypt, 'password': password_encrypt})
+        # no user found
+        if result is None:
             return jsonify({"success": False,
-                            'message': 'Incorrect username or password'}), 500
-            
+                            "message": 'Wrong username or password'}), 200
+        return jsonify({"success": True}), 200
     except Exception as e:
         return f"An error occurred: {e}"
     
