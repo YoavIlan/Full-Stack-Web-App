@@ -1,18 +1,14 @@
 from flask import Flask
-import firebase_admin
-from firebase_admin import credentials, firestore
 from flask import Blueprint, request, jsonify
 import uuid
+import pymongo
+from pymongo import MongoClient
 
 app = Flask(__name__)
 
-
-
-cred = credentials.Certificate("apad-summer-23-firebase-adminsdk-l6p99-717728625b.json")
-fb_app = firebase_admin.initialize_app(cred)
-    
-db = firestore.client()
-users_ref = db.collection('users')
+cluster = MongoClient('mongodb+srv://YoavIlan:xLibKkRHb1VzAYQN@apad-summer-cluster.18cluv9.mongodb.net/?retryWrites=true&w=majority')
+db = cluster['db']
+users_collection = db['users']
 
 # create user by posting to adduser api endpoint
 @app.route('/adduser', methods=['POST'])
@@ -25,7 +21,7 @@ def create_user():
         email_encrypt = str(uuid.uuid5(uuid.NAMESPACE_URL, email))
         password_encrypt = str(uuid.uuid5(uuid.NAMESPACE_URL, password))
         # save to DB using email as id and password as data
-        users_ref.document(email_encrypt).set({'password': password_encrypt})
+        users_collection.insert_one({'email': email_encrypt, 'password': password_encrypt})
         return jsonify({"success": True}), 200
     except Exception as e:
         return f"An error occurred: {e}"
@@ -39,21 +35,16 @@ def get_user(email, password):
         password_encrypt = str(uuid.uuid5(uuid.NAMESPACE_URL, password))
         
         # get the document with the email id
-        doc_ref = users_ref.document(email_encrypt)
-        user = doc_ref.get()
+        try:
+            users_collection.find({'email': email_encrypt, 'password': password_encrypt})[0]
         # username found in db
-        if user.exists:
-            # password matches
-            if user.get('password') == password_encrypt:
-                return jsonify({"success": True}), 200
-            # password is wrong
-            else:
-                return jsonify({"success": False,
-                                "message": "Wrong password!"}), 500
-        # unable to find user
-        return jsonify({"success": False,
-                        'message': 'No such user!'}), 500
+            return jsonify({"success": True}), 200
+        except Exception as e:
+            return jsonify({"success": False,
+                            'message': 'Incorrect username or password'}), 500
+            
     except Exception as e:
         return f"An error occurred: {e}"
     
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
