@@ -10,18 +10,6 @@ app = Flask(__name__)
 
 cred = credentials.Certificate("apad-summer-23-firebase-adminsdk-l6p99-717728625b.json")
 fb_app = firebase_admin.initialize_app(cred)
-
-#users route
-@app.route("/users")
-def users():
-    return {
-        "users":
-            [{
-              'ilan.yoav@gmail.com': 'abc123',
-              'test@test.net': 'aer23',
-              'beepbop@gmail.com': 'password'  
-            }]
-    }
     
 db = firestore.client()
 users_ref = db.collection('users')
