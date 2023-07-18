@@ -16,12 +16,8 @@ resource_collection = db['resources']
 def create_user():
     try:
         # get email and password from json payload
-        # email = next(iter(request.json))
-        # password = request.json[email]
         email = request.json['email']
         password = request.json['password']
-        print(email)
-        print(password)
         # encrypt with uuid5 (SHA-1 encryption)
         email_encrypt = str(uuid.uuid5(uuid.NAMESPACE_URL, email))
         password_encrypt = str(uuid.uuid5(uuid.NAMESPACE_URL, password))
@@ -56,8 +52,6 @@ def get_user2():
     try:
         email = request.json['email']
         password = request.json['password']
-        print(email)
-        print(password)
         # encrypt email and password - this probably should come pre-encrypted to not send raw passwords over API
         email_encrypt = str(uuid.uuid5(uuid.NAMESPACE_URL, email))
         password_encrypt = str(uuid.uuid5(uuid.NAMESPACE_URL, password))
@@ -67,29 +61,8 @@ def get_user2():
         # no user found
         if result is None:
             return jsonify({"success": False,
-                            "message": 'Wrong username or password'}), 200
-        return jsonify({"success": True}), 200
-    except Exception as e:
-        return f"An error occurred: {e}"
-    
-# get specific resource
-@app.route('/api/getresource/<resource>', methods=['GET'])
-def get_resource(resource):
-    try:
-        result = resource_collection.find_one({'_id': resource})
-        return jsonify({"success": True,
-                        'data': result}), 200
-    except Exception as e:
-        return f"An error occurred: {e}"
-    
-# gets all resources
-@app.route('/api/getresources', methods=['GET'])
-def get_resources():
-    try:
-        results = resource_collection.find()
-        results_list = [r for r in results]
-        return jsonify({"success": True,
-                        'data': results_list}), 200
+                            'message': 'Incorrect username or password'}), 500
+            
     except Exception as e:
         return f"An error occurred: {e}"
     
