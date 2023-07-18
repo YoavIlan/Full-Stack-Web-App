@@ -9,9 +9,10 @@ app = Flask(__name__)
 cluster = MongoClient('mongodb+srv://YoavIlan:xLibKkRHb1VzAYQN@apad-summer-cluster.18cluv9.mongodb.net/?retryWrites=true&w=majority')
 db = cluster['db']
 users_collection = db['users']
+resource_collection = db['resources']
 
 # create user by posting to adduser api endpoint
-@app.route('/adduser', methods=['POST'])
+@app.route('/api/adduser', methods=['POST'])
 def create_user():
     try:
         # get email and password from json payload
@@ -27,7 +28,7 @@ def create_user():
         return f"An error occurred: {e}"
 
 # get a user and check for email and password matching
-@app.route('/getuser/<email>/<password>', methods=['GET'])
+@app.route('/api/getuser/<email>/<password>', methods=['GET'])
 def get_user(email, password):
     try:
         # encrypt email and password - this probably should come pre-encrypted to not send raw passwords over API
@@ -41,6 +42,27 @@ def get_user(email, password):
             return jsonify({"success": False,
                             "message": 'Wrong username or password'}), 200
         return jsonify({"success": True}), 200
+    except Exception as e:
+        return f"An error occurred: {e}"
+    
+# get specific resource
+@app.route('/api/getresource/<resource>')
+def get_resource(resource):
+    try:
+        result = resource_collection.find_one({'_id': resource})
+        return jsonify({"success": True,
+                        'data': result}), 200
+    except Exception as e:
+        return f"An error occurred: {e}"
+    
+# gets all resources
+@app.route('/api/getresources')
+def get_resources():
+    try:
+        results = resource_collection.find()
+        results_list = [r for r in results]
+        return jsonify({"success": True,
+                        'data': results_list}), 200
     except Exception as e:
         return f"An error occurred: {e}"
     
