@@ -50,7 +50,7 @@ def get_user(email, password):
     except Exception as e:
         return f"An error occurred: {e}"
     
-# testing with payload instead of with request url
+# get user with payload instead of url. Better for this purpose of users but can use either
 @app.route('/api/v2/getuser', methods=['GET'])
 def get_user2():
     try:
