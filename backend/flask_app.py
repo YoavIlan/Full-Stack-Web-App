@@ -46,7 +46,7 @@ def get_user(email, password):
         return f"An error occurred: {e}"
     
 # get specific resource
-@app.route('/api/getresource/<resource>')
+@app.route('/api/getresource/<resource>', methods=['GET'])
 def get_resource(resource):
     try:
         result = resource_collection.find_one({'_id': resource})
@@ -56,7 +56,7 @@ def get_resource(resource):
         return f"An error occurred: {e}"
     
 # gets all resources
-@app.route('/api/getresources')
+@app.route('/api/getresources', methods=['GET'])
 def get_resources():
     try:
         results = resource_collection.find()
@@ -65,6 +65,8 @@ def get_resources():
                         'data': results_list}), 200
     except Exception as e:
         return f"An error occurred: {e}"
+    
+
     
 if __name__ == '__main__':
     app.run(debug=True)
