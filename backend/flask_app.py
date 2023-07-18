@@ -25,7 +25,6 @@ def users():
     
 db = firestore.client()
 users_ref = db.collection('users')
-userAPI = Blueprint('userAPI', __name__)
 
 # create user by posting to adduser api endpoint
 @app.route('/adduser', methods=['POST'])
@@ -69,5 +68,4 @@ def get_user(email, password):
     except Exception as e:
         return f"An error occurred: {e}"
     
-if __name__ == '__main__':
-    app.run(debug=True)
+app.run(debug=True)
