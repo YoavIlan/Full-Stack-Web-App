@@ -65,14 +65,33 @@ def get_user2():
             
     except Exception as e:
         return f"An error occurred: {e}"
-    
+
+# get a specific resource    
 @app.route('/api/getresource/<resource>', methods=['GET'])
 def get_resource(resource):
     try:
+        # get specific resource
         result = resource_collection.find_one({'_id': resource})
-        return jsonify(result)
+        # return resource
+        return jsonify({'success' : True, 
+                        'data': result})
     except Exception as e:
         return f"An error occurred: {e}"
+
+# api call to get all resources    
+@app.route('/api/getresources', methods=['GET'])
+def get_resources():
+    try:
+        # get all resources
+        result = resource_collection.find()
+        # put resources in list
+        result_list = [r for r in result]
+        return jsonify({'success': True,
+                        'data': result_list}) 
+    except Exception as e:
+        return f"An error occurred: {e}"
+
     
+
 if __name__ == '__main__':
     app.run(debug=True)
