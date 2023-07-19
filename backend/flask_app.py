@@ -66,7 +66,13 @@ def get_user2():
     except Exception as e:
         return f"An error occurred: {e}"
     
-
+@app.route('/api/getresource/<resource>', methods=['GET'])
+def get_resource(resource):
+    try:
+        result = resource_collection.find_one({'_id': resource})
+        return jsonify(result)
+    except Exception as e:
+        return f"An error occurred: {e}"
     
 if __name__ == '__main__':
     app.run(debug=True)
