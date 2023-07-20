@@ -3,10 +3,14 @@ from flask import Blueprint, request, jsonify
 import uuid
 import pymongo
 from pymongo import MongoClient
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+DBSTRING = os.getenv('DBSTRING')
 app = Flask(__name__)
 
-cluster = MongoClient('mongodb+srv://YoavIlan:xLibKkRHb1VzAYQN@apad-summer-cluster.18cluv9.mongodb.net/?retryWrites=true&w=majority')
+cluster = MongoClient(DBSTRING)
 db = cluster['db']
 users_collection = db['users']
 resource_collection = db['resources']
