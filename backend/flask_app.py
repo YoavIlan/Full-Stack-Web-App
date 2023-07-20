@@ -14,6 +14,7 @@ cluster = MongoClient(DBSTRING)
 db = cluster['db']
 users_collection = db['users']
 resource_collection = db['resources']
+project_collection = db['projects']
 
 # create user by posting to adduser api endpoint
 @app.route('/api/adduser', methods=['POST'])
@@ -92,6 +93,18 @@ def get_resources():
         result_list = [r for r in result]
         return jsonify({'success': True,
                         'data': result_list}) 
+    except Exception as e:
+        return f"An error occurred: {e}"
+    
+@app.route('/api/getproj/<projectid>')
+def get_project(projectid):
+    try:
+        result = project_collection.find_one({'_id': projectid})
+        if result is None:
+            return jsonify({'success': False,
+                            'message': "No such project"})
+        return jsonify({'success': True,
+                        'data': result})
     except Exception as e:
         return f"An error occurred: {e}"
 
