@@ -96,7 +96,7 @@ def get_resources():
     except Exception as e:
         return f"An error occurred: {e}"
     
-@app.route('/api/getproj/<projectid>')
+@app.route('/api/getproj/<projectid>', methods=['GET'])
 def get_project(projectid):
     try:
         result = project_collection.find_one({'_id': projectid})
@@ -107,6 +107,50 @@ def get_project(projectid):
                         'data': result})
     except Exception as e:
         return f"An error occurred: {e}"
+
+@app.route('/api/makeproject', methods=['POST'])
+def create_project():
+    try:
+        id = request.json['id']
+        name = request.json['name']
+        desc = request.json['description']
+        resources = {'bikes': 0, 'scooters': 0}
+        
+        project_collection.insert_one({'_id': id,
+                                    'name': name,
+                                    'desc': desc,
+                                    'resources': resources})
+        
+        return jsonify({'success': True})
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+@app.route('/api/checkin', methods=['POST'])
+def check_in():
+    try:
+        id = request.json['id']
+        data = request.json['data']
+        resources = resource_collection.find()
+        # project_collection.update_one({'_id': id}, {'resources'})
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+@app.route('/api/checkout', methods=['POST'])
+def check_out():
+    try:
+        id = request.json['id']
+        data = request.json['data']
+        resources = [resource for resource in resource_collection.find()]
+        for resource in resources:
+            resource_id = resource['_id']
+            resource_collection.update_one({'_id': resource_id}, {'$inc': {'availability': -1 * data[resource_id]}})
+            project_collection.update_one({'_id': id}, {'$inc': {f'resources.{resource_id}': data[resource_id]}})
+        return jsonify({'success': True})
+    except Exception as e:
+        return f"An error occurred: {e}" 
+
+
+        
 
     
 
