@@ -130,8 +130,13 @@ def check_in():
     try:
         id = request.json['id']
         data = request.json['data']
-        resources = resource_collection.find()
-        # project_collection.update_one({'_id': id}, {'resources'})
+        resources = [resource for resource in resource_collection.find()]
+        #TODO build in error checking
+        for resource in resources:
+            resource_id = resource['_id']
+            resource_collection.update_one({'_id': resource_id}, {'$inc': {'availability': data[resource_id]}})
+            project_collection.update_one({'_id': id}, {'$inc': {f'resources.{resource_id}': -1 * data[resource_id]}})
+        return jsonify({'success': True})
     except Exception as e:
         return f"An error occurred: {e}"
 
@@ -141,6 +146,7 @@ def check_out():
         id = request.json['id']
         data = request.json['data']
         resources = [resource for resource in resource_collection.find()]
+        #TODO build in error checking
         for resource in resources:
             resource_id = resource['_id']
             resource_collection.update_one({'_id': resource_id}, {'$inc': {'availability': -1 * data[resource_id]}})
