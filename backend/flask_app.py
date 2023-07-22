@@ -160,12 +160,19 @@ def check_out():
     try:
         id = request.json['id']
         data = request.json['data']
+        # check for negative numbers
+        for resource_name, transaction_amt in data.items():
+            if transaction_amt < 0 :
+                return jsonify({'success': False,
+                                'message': 'checkout cannot be negative'})
         resources = [resource for resource in resource_collection.find()]
-        #TODO build in error checking
         for resource in resources:
             resource_id = resource['_id']
-            resource_collection.update_one({'_id': resource_id}, {'$inc': {'availability': -1 * data[resource_id]}})
-            project_collection.update_one({'_id': id}, {'$inc': {f'resources.{resource_id}': data[resource_id]}})
+            requested_amt = data[resource_id]
+            # only allow checking out resource availability amount or less
+            transaction_amt = requested_amt if resource['availability'] > requested_amt else resource['availability']
+            resource_collection.update_one({'_id': resource_id}, {'$inc': {'availability': -1 * transaction_amt}})
+            project_collection.update_one({'_id': id}, {'$inc': {f'resources.{resource_id}': transaction_amt}})
         return jsonify({'success': True})
     except Exception as e:
         return f"An error occurred: {e}" 
