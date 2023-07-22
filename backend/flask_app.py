@@ -16,6 +16,20 @@ users_collection = db['users']
 resource_collection = db['resources']
 project_collection = db['projects']
 
+# helper to validate check in amount
+def _checkin_is_valid(id, transaction):
+    # check for negative transactions
+    for _, transaction_amt in transaction.items():
+        if transaction_amt < 0:
+            return False
+    project_resources = get_project(id).json['data']['resources']
+    # check user isn't trying to check in more than they have
+    for r_name, proj_amt in project_resources.items():
+        transaction_amt = transaction[r_name]
+        if transaction_amt > proj_amt:
+            return False
+    return True
+    
 # create user by posting to adduser api endpoint
 @app.route('/api/adduser', methods=['POST'])
 def create_user():
@@ -130,12 +144,13 @@ def check_in():
     try:
         id = request.json['id']
         data = request.json['data']
-        resources = [resource for resource in resource_collection.find()]
-        #TODO build in error checking
+        if not _checkin_is_valid(id, data):
+            return jsonify({'success': False,
+                            'message': 'invalid check in'})
+        resources = [resource['_id'] for resource in resource_collection.find()]
         for resource in resources:
-            resource_id = resource['_id']
-            resource_collection.update_one({'_id': resource_id}, {'$inc': {'availability': data[resource_id]}})
-            project_collection.update_one({'_id': id}, {'$inc': {f'resources.{resource_id}': -1 * data[resource_id]}})
+            resource_collection.update_one({'_id': resource}, {'$inc': {'availability': data[resource]}})
+            project_collection.update_one({'_id': id}, {'$inc': {f'resources.{resource}': -1 * data[resource]}})
         return jsonify({'success': True})
     except Exception as e:
         return f"An error occurred: {e}"
