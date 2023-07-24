@@ -141,7 +141,9 @@ def create_project():
         
         return jsonify({'success': True})
     except Exception as e:
-        return f"An error occurred: {e}"
+        return jsonify({"success": False,
+                        "error": "Project ID taken"})
+
 
 @app.route('/api/checkin', methods=['POST'])
 def check_in():
