@@ -4,8 +4,11 @@
 
 #### Add User
 Request URL: "/api/adduser"
+
 Method: "POST"
+
 Headers: "Content-Type": "application/json"
+
 Body:
 ```json
 {
@@ -13,6 +16,7 @@ Body:
 	"password": <password>
 }
 ```
+
 Return:
 ```json
 {
@@ -29,8 +33,11 @@ OR
 
 #### Authenticate User
 Request URL: "/api/getuser/&ltemail&gt/&ltpassword&gt"
+
 Method: "GET"
+
 Headers: N/A
+
 Body: N/A
 
 Return: 
@@ -52,8 +59,11 @@ OR
 #### Get One Resource
 Request URL: "/api/getresource/&ltresource&gt"
 WHERE resource is "bikes" OR "scooters"
+
 Method: "GET"
+
 Headers: N/A
+
 Body: N/A
 
 Return:
@@ -70,8 +80,11 @@ Return:
 
 #### Get All Resources
 Request URL: "/api/getresources"
+
 Method: "GET"
+
 Headers: N/A
+
 Body: N/A
 
 Return:
@@ -97,8 +110,11 @@ Return:
 
 #### Add Project
 Request URL: "/api/makeproject"
+
 Method: "POST"
+
 Headers: "Content-Type": "application/json"
+
 Body:
 ```json
 {
@@ -107,6 +123,7 @@ Body:
     "description": <description> 
 }
 ```
+
 Return:
 ```json
 {
@@ -123,8 +140,11 @@ OR
 
 #### Access Project
 Request URL: "/api/getproj/&ltprojectid&gt"
+
 Method: "GET"
+
 Headers: N/A
+
 Body: N/A
 
 Return:
@@ -152,8 +172,11 @@ OR
 
 #### Check In
 Request URL: "/api/checkin"
+
 Method: "POST"
+
 Headers: "Content-Type": "application/json"
+
 Body:
 ```JSON
 {
@@ -181,8 +204,11 @@ OR
 
 #### Check Out
 Request URL: "/api/checkout"
+
 Method: "POST"
+
 Headers: "Content-Type": "application/json"
+
 Body:
 ```JSON
 {
