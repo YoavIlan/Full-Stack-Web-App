@@ -4,9 +4,12 @@ import './App.css';
 import { MUIButton } from '../src/components/MUIButtons';
 import {MUITextField} from '../src/components/TextFields';
 import { MUIBox } from './components/MUIBox';
+import React, { useState } from "react";
 
 
 function App() {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   return (
     <div className="App">
       <header className="App-header">
@@ -16,8 +19,8 @@ function App() {
           <code>Sign In</code>
         </p>
         <MUIBox>
-        <MUITextField label="Email" />
-        <MUITextField label="Passwords" type="password" />
+        <MUITextField label="Email" value={email} onChange={(e) => {setEmail(e.target.value);console.log(e.target.value)}}/>
+        <MUITextField label="Passwords" type="password" value={username}  onChange={(e) => {setUsername(e.target.value);console.log(e.target.value)}}/>
         
         <MUIButton >
         <a
@@ -28,7 +31,6 @@ function App() {
         >
           Log  In
         </a>
-        
         </MUIButton>
         <MUIButton >
         <a
