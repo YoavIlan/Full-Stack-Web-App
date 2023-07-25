@@ -17,11 +17,12 @@ For development purposes, it is **strongly** recommended that you create a virtu
 `python -m venv venv`
 This will create a virtual environment
 
+`source venv/bin/activate`
+This will activate the virtual environment.
+
 `pip install -r requirements.txt`
 This will install required dependencies
 
-`source venv/bin/activate`
-This will activate the virtual environment.
 
 Note: When working in vscode, you may need to set the python interpreter manually. You will know this is the case if vscode doesn't recognize any imports.
 
