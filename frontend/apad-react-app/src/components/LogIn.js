@@ -4,6 +4,7 @@ import {MUITextField} from './TextFields';
 import { MUIBox } from './MUIBox';
 import React, { useState } from "react";
 import user from '../user.png';
+import { useNavigate } from "react-router-dom";
 
 // Export Login component
 export const LogIn = () => {
@@ -15,6 +16,13 @@ export const LogIn = () => {
   //Set up data variable and setter method for data
   const [data, setData] = useState([{}])
 
+  // Navigate method for routing purposes
+  const navigate = useNavigate();
+
+  // Handle click for routing to Sign Up Page
+  const handleClick = (e) => {
+    navigate("/sign-up");
+  }
 
   // Handle submit function when the log in button is clicked
   const handleSubmit = (e) => {
@@ -30,7 +38,7 @@ export const LogIn = () => {
         alert(data.message)
       }
     )
-
+    navigate("/dashboard")
 }
 // The login page ui setup
   return (
@@ -47,7 +55,8 @@ export const LogIn = () => {
         onClick={() => { handleSubmit(); }}>
           Log  In
         </MUIButton>
-        <MUIButton >
+        <MUIButton
+        onClick={() => { handleClick(); }}>
           Sign Up       
         </MUIButton>
         </MUIBox>

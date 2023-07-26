@@ -10,6 +10,7 @@ import '../App.css';
 import { MUIButton } from './MUIButtons';
 import { MUIBox } from './MUIBox';
 import APIService from './APIService'
+import { useNavigate } from "react-router-dom";
 
 // Export Login component
 export const SignUp = () => {
@@ -33,6 +34,9 @@ export const SignUp = () => {
         .catch(error => console.log('error', error))
     }
 
+    // Navigate method for routing purposes
+    const navigate = useNavigate();
+
     //The handleSubmit will be triggered upon clicking the submit button
     const handleSubmit = (event) => {
     console.log(email)
@@ -40,6 +44,11 @@ export const SignUp = () => {
     addUsers()
     setEmail('')
     setPassword('')
+    navigate("/dashboard");
+  };
+
+    const handleClick = (event) => {
+    navigate("/");
   };
 
   // The UI setup for the sign up front end
@@ -120,7 +129,7 @@ export const SignUp = () => {
             {/* Currently this part is not working */}
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
