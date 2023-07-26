@@ -1,50 +1,17 @@
-import logo from './logo.svg';
-import user from './user.png';
 import './App.css';
-import { MUIButton } from '../src/components/MUIButtons';
-import {MUITextField} from '../src/components/TextFields';
-import { MUIBox } from './components/MUIBox';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+//if there is a red line here, just uncomment either log in or sign up to resolve
+import { SignUp } from './components/SignUp';
+import { LogIn } from './components/LogIn';
 
 
 function App() {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <img src={user} className="login-pic" alt="logo" />
-        <p>
-          <code>Sign In</code>
-        </p>
-        <MUIBox>
-        <MUITextField label="Email" value={email} onChange={(e) => {setEmail(e.target.value);console.log(e.target.value)}}/>
-        <MUITextField label="Passwords" type="password" value={username}  onChange={(e) => {setUsername(e.target.value);console.log(e.target.value)}}/>
-        
-        <MUIButton >
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Log  In
-        </a>
-        </MUIButton>
-        <MUIButton >
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Sign Up
-        </a>        
-        </MUIButton>
-        </MUIBox>
-      </header>
-    </div>
+    // Uncomment sign up or log in to see one page or the other
+
+    // <div><SignUp/></div>
+    <div><LogIn/></div>
     
   );
 }

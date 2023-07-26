@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 
-export const MUIBox = ({width, height, backgroundColor, hover, component, children, display}) => {
+//This is the Material UI Box component currently using across the whole web app
+export const MUIBox = ({ children}) => {
   return (
     <Box
     width= "450px"

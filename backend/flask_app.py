@@ -48,10 +48,15 @@ def create_user():
         password_encrypt = str(uuid.uuid5(uuid.NAMESPACE_URL, password))
         # save to DB using email as id and password as data
         users_collection.insert_one({'_id': email_encrypt, 'password': password_encrypt})
-        return jsonify({"success": True}), 200
+        # Added a success message when user sign up successfully, and a alert will prompted at the front-end 
+        return jsonify({"success": True,
+                        "message": 'Sign Up Success!'}), 200
     except Exception as e:
+        # Changed it from error to message type so we could use it in the front end alert
         return jsonify({"success": False,
-                        "error": "User already taken!"}), 200
+                        "message": 'User already taken!'}), 200        
+        # return jsonify({"success": False,
+        #                 "error": "User already taken!"}), 200
 
 # get a user and check for email and password matching
 @app.route('/api/getuser/<email>/<password>', methods=['GET'])
@@ -72,7 +77,8 @@ def validate_user(email, password):
         if result is None:
             return jsonify({"success": False,
                             "message": 'Wrong username or password'}), 200
-        return jsonify({"success": True}), 200
+        return jsonify({"success": True,
+                        "message": 'Log In Success'}), 200
     except Exception as e:
         return f"An error occurred: {e}"
     
@@ -191,7 +197,9 @@ def check_out():
 
 
         
-
+@app.route("/api/memebers")
+def members():
+    return {"memebers": ["Member1", "Member2", "Member3"]}
     
 
 if __name__ == '__main__':
