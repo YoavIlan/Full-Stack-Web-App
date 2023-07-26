@@ -13,6 +13,11 @@
   }
 }
 
+.login-pic{
+  height: 30vmin;
+  pointer-events: none;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

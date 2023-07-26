@@ -1,24 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from "react";
+//if there is a red line here, dont worry it doesnt prevent you from compiling pls not remove
+import { SignUp } from './components/SignUp';
+import { LogIn } from './components/LogIn';
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // Uncomment sign up or log in to see one page or the other
+
+    // <div><SignUp/></div>
+    <div><LogIn/></div>
+    
   );
 }
 
