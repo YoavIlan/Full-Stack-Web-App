@@ -30,6 +30,8 @@ Use `cmd + shift + p` to pull up vscode commands. Type in "Python: Select Interp
 
 Copy the full path of the venv interpreter. venv > bin > python. Right click on that and copy full path. Paste into the vscode command, enter, then do that again if needed.
 
+Finally, you will need to put the .env file I sent over WhatsApp in the backend folder. This includes the MongoDB URL and will be used by the flask app to connect to the database.
+
 
 
 # Development Best Practices
