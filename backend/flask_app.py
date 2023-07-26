@@ -194,12 +194,6 @@ def check_out():
         return jsonify({'success': True})
     except Exception as e:
         return f"An error occurred: {e}" 
-
-
-        
-@app.route("/api/memebers")
-def members():
-    return {"memebers": ["Member1", "Member2", "Member3"]}
     
 
 if __name__ == '__main__':
