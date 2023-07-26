@@ -19,6 +19,7 @@ This will create a virtual environment
 
 `source venv/bin/activate`
 This will activate the virtual environment.
+(For windows users try: `venv/Scripts/activate` to activate & `venv/Scripts/deactivate` to deactivate)
 
 `pip install -r requirements.txt`
 This will install required dependencies
