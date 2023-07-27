@@ -18,8 +18,8 @@ const Table = (props) => {
             <thead>
                 <tr>
                     <th className="table-header">HW Set</th>
-                    <th className="table-header">Availability</th>
                     <th className="table-header">Capacity</th>
+                    <th className="table-header">Availability</th>
                 </tr>
             </thead>
             <tbody>
