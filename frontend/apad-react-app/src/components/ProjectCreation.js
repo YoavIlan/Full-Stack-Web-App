@@ -15,9 +15,9 @@ export const ProjectCreation = () => {
             <code>Create a new Project</code>
           </p>
           <MUIBox>
-          <MUITextField label="Project Name" value={proj_name}/>
-          <MUITextField label="Project ID" type="proj_id" value={proj_id}/>
-          <MUITextField label="Project Description" type ="proj_desc" value ={proj_desc}/>
+          <MUITextField label="Project Name"/>
+          <MUITextField label="Project ID"/>
+          <MUITextField label="Project Description"/>
           <MUIButton>
             Create Project
           </MUIButton>
