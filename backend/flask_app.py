@@ -125,7 +125,8 @@ def get_project(projectid):
             return jsonify({'success': False,
                             'message': "No such project"})
         return jsonify({'success': True,
-                        'data': result})
+                        'data': result,
+                        'message': "Load Projects Success!"})
     except Exception as e:
         return f"An error occurred: {e}"
 
