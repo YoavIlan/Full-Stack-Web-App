@@ -11,7 +11,7 @@ function App() {
   return (
     // Uncomment sign up or log in to see one page or the other
 
-     //<div><SignUp/></div>
+    //<div><SignUp/></div>
     //<div><LogIn/></div>
     <div><ProjectCreation/></div>
   );

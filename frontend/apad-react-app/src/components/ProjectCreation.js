@@ -3,6 +3,7 @@ import { MUIButton } from './MUIButtons';
 import {MUITextField} from './TextFields';
 import { MUIBox } from './MUIBox';
 import React, { useState } from "react";
+import Typography from '@mui/material/Typography';
 
 // Export the Project Creation component
 export const ProjectCreation = () => {
@@ -10,10 +11,9 @@ export const ProjectCreation = () => {
   // Project Creation UI setup
     return (
       <div className="App">
-        <header className="App-header">
-          <p>
-            <code>Create a new Project</code>
-          </p>
+          <Typography component="h1" variant="h5">
+            Create a New Project
+          </Typography>
           <MUIBox>
           <MUITextField label="Project Name"/>
           <MUITextField label="Project ID"/>
@@ -25,7 +25,6 @@ export const ProjectCreation = () => {
             Cancel      
           </MUIButton>
           </MUIBox>
-        </header>
       </div>
       
     );
