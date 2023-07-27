@@ -17,17 +17,21 @@ For development purposes, it is **strongly** recommended that you create a virtu
 `python -m venv venv`
 This will create a virtual environment
 
+`source venv/bin/activate`
+This will activate the virtual environment.
+(For windows users try: `venv/Scripts/activate` to activate & `venv/Scripts/deactivate` to deactivate)
+
 `pip install -r requirements.txt`
 This will install required dependencies
 
-`source venv/bin/activate`
-This will activate the virtual environment.
 
 Note: When working in vscode, you may need to set the python interpreter manually. You will know this is the case if vscode doesn't recognize any imports.
 
 Use `cmd + shift + p` to pull up vscode commands. Type in "Python: Select Interpreter"
 
 Copy the full path of the venv interpreter. venv > bin > python. Right click on that and copy full path. Paste into the vscode command, enter, then do that again if needed.
+
+Finally, you will need to put the .env file I sent over WhatsApp in the backend folder. This includes the MongoDB URL and will be used by the flask app to connect to the database.
 
 
 
