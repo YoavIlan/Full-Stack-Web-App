@@ -5,7 +5,7 @@ import { MUIBox } from './MUIBox';
 import React, { useState } from "react";
 
 // Export the Project Creation component
-export const LogIn = () => {
+export const ProjectCreation = () => {
 
   // Project Creation UI setup
     return (
@@ -15,8 +15,9 @@ export const LogIn = () => {
             <code>Create a new Project</code>
           </p>
           <MUIBox>
-          <MUITextField label="Email" value={email}/>
-          <MUITextField label="Passwords" type="password" value={password}/>
+          <MUITextField label="Project Name" value={proj_name}/>
+          <MUITextField label="Project ID" type="proj_id" value={proj_id}/>
+          <MUITextField label="Project Description" type ="proj_desc" value ={proj_desc}/>
           <MUIButton>
             Create Project
           </MUIButton>
