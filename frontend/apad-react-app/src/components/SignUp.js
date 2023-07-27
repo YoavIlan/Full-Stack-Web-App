@@ -21,6 +21,9 @@ export const SignUp = () => {
     // const[lastName, setLastName] = useState('')
     const [data, setData] = useState([{}])
 
+    // Navigate method for routing purposes
+    const navigate = useNavigate();
+
     //The add user function to call the add user api service from APIService class to process json data load
     //And send to the mongodb
     const addUsers = () =>{
@@ -28,14 +31,16 @@ export const SignUp = () => {
           data => {
             setData(data)
             console.log(data)
-            alert(data.message)
+            if (data.success) {
+              navigate("/dashboard")
+            }
+            else {
+              alert(data.message)
+            }
           }
         )
         .catch(error => console.log('error', error))
     }
-
-    // Navigate method for routing purposes
-    const navigate = useNavigate();
 
     //The handleSubmit will be triggered upon clicking the submit button
     const handleSubmit = (event) => {
@@ -44,7 +49,6 @@ export const SignUp = () => {
     addUsers()
     setEmail('')
     setPassword('')
-    navigate("/dashboard");
   };
 
     const handleClick = (event) => {

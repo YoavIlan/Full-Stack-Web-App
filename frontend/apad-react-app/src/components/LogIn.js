@@ -26,7 +26,7 @@ export const LogIn = () => {
 
   // Handle submit function when the log in button is clicked
   const handleSubmit = (e) => {
-    var address = "/api/getuser/"
+    var address = "/api/getuser"
     var userEmail = email
     var userPassword = password
     fetch(address+"/"+userEmail+"/"+userPassword).then(
@@ -35,10 +35,14 @@ export const LogIn = () => {
       data => {
         setData(data)
         console.log(data)
-        alert(data.message)
+        if (data.success) {
+          navigate("/dashboard")
+        }
+        else {
+          alert(data.message)
+        }
       }
     )
-    navigate("/dashboard")
 }
 // The login page ui setup
   return (
