@@ -34,6 +34,7 @@ export const ProjectCreation = () => {
     console.log(name)
     console.log(description)
     createProject()
+    console.log(data)
     setId('')
     setName('')
     setDescription('')
@@ -82,7 +83,7 @@ export const ProjectCreation = () => {
             name = "Project Description"
             autoComplete="Project Description"
             value={description}
-            onChange={(e) => {setName(e.target.value);console.log(e.target.value)}}
+            onChange={(e) => {setDescription(e.target.value);console.log(e.target.value)}}
             />
             </Grid>
           </Grid>
