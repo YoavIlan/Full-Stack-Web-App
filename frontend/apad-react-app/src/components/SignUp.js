@@ -10,6 +10,7 @@ import '../App.css';
 import { MUIButton } from './MUIButtons';
 import { MUIBox } from './MUIBox';
 import APIService from './APIService'
+import { useNavigate } from "react-router-dom";
 
 // Export Login component
 export const SignUp = () => {
@@ -20,6 +21,9 @@ export const SignUp = () => {
     // const[lastName, setLastName] = useState('')
     const [data, setData] = useState([{}])
 
+    // Navigate method for routing purposes
+    const navigate = useNavigate();
+
     //The add user function to call the add user api service from APIService class to process json data load
     //And send to the mongodb
     const addUsers = () =>{
@@ -27,7 +31,12 @@ export const SignUp = () => {
           data => {
             setData(data)
             console.log(data)
-            alert(data.message)
+            if (data.success) {
+              navigate("/dashboard")
+            }
+            else {
+              alert(data.message)
+            }
           }
         )
         .catch(error => console.log('error', error))
@@ -41,6 +50,10 @@ export const SignUp = () => {
     addUsers()
     setEmail('')
     setPassword('')
+  };
+
+    const handleClick = (event) => {
+    navigate("/");
   };
 
   // The UI setup for the sign up front end
@@ -121,7 +134,7 @@ export const SignUp = () => {
             {/* Currently this part is not working */}
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
