@@ -1,4 +1,3 @@
-import React from "react";
 import {MUIButton} from './MUIButtons'
 import { useNavigate } from "react-router-dom";
 
@@ -7,12 +6,12 @@ export default function Dashboard() {
     // Navigate method for routing purposes
     const navigate = useNavigate();
     
-    const handleClick = (event) => {
+    const handleClick = () => {
         navigate("/");
       };
 
     // navigate to project creation page  
-    const createProject = (event) => {
+    const createProject = () => {
       navigate("/project-creation");
     }
 
@@ -21,11 +20,11 @@ export default function Dashboard() {
         <div>
         <h1> This is the dashboard </h1>
         <MUIButton
-        onClick={() => { handleClick(); }}>
+        onClick={() => { handleClick()}}>
           Return to Log In
         </MUIButton>
         <MUIButton
-        onClick={() => {createProject();}}>
+        onClick={() => {createProject()}}>
           Create a New Project
         </MUIButton>
         </div>
