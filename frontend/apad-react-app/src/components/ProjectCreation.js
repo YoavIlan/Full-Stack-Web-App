@@ -7,6 +7,7 @@ import { MUIBox } from './MUIBox';
 import APIService from './APIService'
 import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
+import { useNavigate } from "react-router-dom";
 
 // Export the Project Creation component
 export const ProjectCreation = () => {
@@ -15,8 +16,11 @@ export const ProjectCreation = () => {
   const[description, setDescription] = useState('')
   const [data, setData] = useState([{}])
 
-  //The add user function to call the create project api service from APIService class to process json data load
-  //And send to the mongodb
+  // Navigate method for routing purposes
+  const navigate = useNavigate();
+
+  //The createProject function calls the create project api service from APIService class to process
+  //json data load and send to mongodb
   const createProject = () =>{
       APIService.CreateProject({_id, name, description}).then(
         data => {
@@ -40,6 +44,11 @@ export const ProjectCreation = () => {
     setDescription('')
 };
 
+// navigate back to the dashboard when the user cancels project creation
+const goToDashboard = (event) => {
+  navigate("/dashboard");
+}
+
   // Project Creation UI setup
     return (
       <div className="App">
@@ -51,6 +60,7 @@ export const ProjectCreation = () => {
           <MUIBox component="form" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
           <Grid item xs={12}>
+            {/* creat 3 text fields for user input*/}
           <TextField
             required
             fullWidth
@@ -87,6 +97,7 @@ export const ProjectCreation = () => {
             />
             </Grid>
           </Grid>
+          {/* create buttons */}
           <MUIButton
           fullWidth
           variant="contained"
@@ -94,8 +105,9 @@ export const ProjectCreation = () => {
           sx={{ mt: 3, mb: 2 }}>
             Create Project
           </MUIButton>
-          <MUIButton > 
-            {/* Need to add routing functionality here */}
+          <MUIButton 
+          onClick={() => { goToDashboard();}}
+          > 
             Cancel      
           </MUIButton>
           </MUIBox>
