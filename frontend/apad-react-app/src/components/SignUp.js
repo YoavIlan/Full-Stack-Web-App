@@ -46,6 +46,7 @@ export const SignUp = () => {
     const handleSubmit = (event) => {
     console.log(email)
     console.log(password)
+    console.log(data)
     addUsers()
     setEmail('')
     setPassword('')
