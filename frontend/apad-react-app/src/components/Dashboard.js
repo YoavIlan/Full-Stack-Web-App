@@ -15,6 +15,11 @@ export default function Dashboard() {
       navigate("/project-creation");
     }
 
+    // navigate to project creation page  
+    const checkInOut = () => {
+      navigate("/check-in-out");
+    }
+
     // Placeholder title and button for testing purposes
     return (
         <div>
@@ -26,6 +31,10 @@ export default function Dashboard() {
         <MUIButton
         onClick={() => {createProject()}}>
           Create a New Project
+        </MUIButton>
+        <MUIButton
+        onClick={() => {checkInOut()}}>
+          Check In/Out Resources
         </MUIButton>
         </div>
     )

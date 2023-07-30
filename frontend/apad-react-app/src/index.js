@@ -8,6 +8,7 @@ import LogIn from './components/LogIn'
 import {SignUp} from './components/SignUp'
 import Dashboard from './components/Dashboard'
 import { ProjectCreation } from './components/ProjectCreation';
+import CheckInOut from './components/CheckInOut';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +19,7 @@ root.render(
         <Route path="sign-up" element={<SignUp />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="project-creation" element={<ProjectCreation /> } />
+        <Route path="check-in-out" element={<CheckInOut /> } />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
