@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {MUITextField} from './TextFields';
 import { MUIBox } from './MUIBox';
 import {MUIButton} from './MUIButtons'
@@ -7,7 +7,6 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import {Select, MenuItem, FormControl, InputLabel} from "@mui/material";
 import APIService from './APIService'
-import ResourceList from "./ResourceList";
 
 export default function CheckInOut() {
     const[_id, setId] = useState('')
@@ -15,6 +14,7 @@ export default function CheckInOut() {
     const[checkin, setCheckIn] = useState('')
     const[checkout, setCheckOut] = useState('')
     const [data, setData] = useState([{}])
+    const[resourcesData, setResourcesData] = useState([]);
 
     // Navigate method for routing purposes
     const navigate = useNavigate();
@@ -24,8 +24,28 @@ export default function CheckInOut() {
         navigate("/dashboard");
     }
 
+    useEffect(() => {
+        APIService.GetResources()
+        .then(response => {
+        if (response.success) {
+          setResourcesData(response.data);
+        } else {
+          console.log("Request was not successful.");
+        }
+        })
+        .catch(error => {
+        console.log("Error occurred:", error);
+        });
+    }, []);
+
+    function handleResourceChange(event) {
+        setResource(event.target.value);
+        console.log("Selected Resource ID:", event.target.value);
+      }
+
     const checkIn = (e) => {
-        APIService.CheckIn({_id}).then(
+        var data = {resource:checkin}
+        APIService.CheckIn({_id, data}).then(
             data => {
               setData(data)
               console.log(data)
@@ -36,7 +56,18 @@ export default function CheckInOut() {
     }
 
     const checkOut = (e) => {
-        navigate("/");
+        var tocheckout = {[resource] : checkout}
+        console.log(tocheckout)
+        var checkOutDict = {_id, data:tocheckout}
+        console.log(checkOutDict)
+        APIService.CheckOut(checkOutDict).then(
+            data => {
+              setData(data)
+              console.log(data)
+              alert(data.message)
+            }
+          )
+          .catch(error => console.log('error', error))
     }
 
     // Placeholder title and button for testing purposes
@@ -64,9 +95,13 @@ export default function CheckInOut() {
                             id="resource-dropdown"
                             value={resource}
                             label="Resource"
-                            onChange={(e) => {setResource(e.target.value);console.log(e.target.value)}}
+                            onChange={handleResourceChange}
                         >
-                            <ResourceList />
+                            {resourcesData.map(resource => (
+                            <MenuItem key={resource._id} value={resource._id}>
+                                {resource._id}
+                            </MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
                 </Grid>
