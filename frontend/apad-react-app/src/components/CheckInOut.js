@@ -9,7 +9,7 @@ import {Select, MenuItem, FormControl, InputLabel} from "@mui/material";
 import APIService from './APIService'
 
 export default function CheckInOut() {
-    const[_id, setId] = useState('')
+    const[id, setId] = useState('')
     const[resource, setResource] = useState('')
     const[checkin, setCheckIn] = useState('')
     const[checkout, setCheckOut] = useState('')
@@ -24,6 +24,7 @@ export default function CheckInOut() {
         navigate("/dashboard");
     }
 
+    // UseEffect function to update the existing resource List.
     useEffect(() => {
         APIService.GetResources()
         .then(response => {
@@ -38,14 +39,26 @@ export default function CheckInOut() {
         });
     }, []);
 
+    // Resource changer function for dropdown
     function handleResourceChange(event) {
         setResource(event.target.value);
         console.log("Selected Resource ID:", event.target.value);
       }
 
+    // Check In function using the API Service and a check that adds all existing resources as needed
     const checkIn = (e) => {
-        var data = {resource:checkin}
-        APIService.CheckIn({_id, data}).then(
+        var tocheckin = {}
+        for (let key in resourcesData) {
+            if (resourcesData.hasOwnProperty(key)){
+                if (resourcesData[key]["_id"] == resource) {
+                    tocheckin[resourcesData[key]["_id"]] = checkin
+                }
+                else {
+                    tocheckin[resourcesData[key]["_id"]] = 0
+                }
+            }
+        }
+        APIService.CheckIn({id, data:tocheckin}).then(
             data => {
               setData(data)
               console.log(data)
@@ -55,12 +68,20 @@ export default function CheckInOut() {
           .catch(error => console.log('error', error))
     }
 
+    // Check Out function using the API Service and a check that adds additional resources as needed
     const checkOut = (e) => {
-        var tocheckout = {[resource] : checkout}
-        console.log(tocheckout)
-        var checkOutDict = {_id, data:tocheckout}
-        console.log(checkOutDict)
-        APIService.CheckOut(checkOutDict).then(
+        var tocheckout = {}
+        for (let key in resourcesData) {
+            if (resourcesData.hasOwnProperty(key)){
+                if (resourcesData[key]["_id"] == resource) {
+                    tocheckout[resourcesData[key]["_id"]] = checkout
+                }
+                else {
+                    tocheckout[resourcesData[key]["_id"]] = 0
+                }
+            }
+        }
+        APIService.CheckOut({id, data:tocheckout}).then(
             data => {
               setData(data)
               console.log(data)
@@ -70,7 +91,7 @@ export default function CheckInOut() {
           .catch(error => console.log('error', error))
     }
 
-    // Placeholder title and button for testing purposes
+    // UI for check in and check out with auto-updating resource dropdown
     return (
         <div>
         <MUIBox>
@@ -80,10 +101,10 @@ export default function CheckInOut() {
                     <TextField
                     required
                     fullWidth
-                    id="_id"
+                    id="id"
                     label="Project ID"
-                    name="_id"
-                    value={_id}
+                    name="id"
+                    value={id}
                     onChange={(e) => {setId(e.target.value);console.log(e.target.value)}}
                     />
                 </Grid>
