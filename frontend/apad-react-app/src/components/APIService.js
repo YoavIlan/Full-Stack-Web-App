@@ -15,10 +15,42 @@ export default class APIService{
     }
 
     static CreateProject(body){
-        var address ="/api/makeproject"
+        var address = "/api/makeproject"
         return fetch(address, {
             'method': 'POST',
             headers : {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(body)
+        }).then(response=>response.json())
+        .catch(error => console.log(error))
+    }
+
+    static GetResources() {
+        var address = "/api/getresources"
+        return (fetch(address)
+        .then(response=> response.json())
+        .catch(error => console.log(error))
+        )
+    }
+
+    static CheckIn(body){
+        var address = "/api/checkin"
+        return fetch(address, {
+            'method':'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(body)
+        }).then(response=>response.json())
+        .catch(error => console.log(error))
+    }
+
+    static CheckOut(body){
+        var address = "/api/checkout"
+        return fetch(address, {
+            'method':'POST',
+            headers: {
                 'Content-Type':'application/json'
             },
             body:JSON.stringify(body)

@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import {Select, MenuItem, FormControl, InputLabel} from "@mui/material";
-
+import APIService from './APIService'
+import ResourceList from "./ResourceList";
 
 export default function CheckInOut() {
     const[_id, setId] = useState('')
@@ -19,8 +20,23 @@ export default function CheckInOut() {
     const navigate = useNavigate();
 
     // Return to dashboard
-    const goToDashboard = (event) => {
+    const goToDashboard = () => {
         navigate("/dashboard");
+    }
+
+    const checkIn = (e) => {
+        APIService.CheckIn({_id}).then(
+            data => {
+              setData(data)
+              console.log(data)
+              alert(data.message)
+            }
+          )
+          .catch(error => console.log('error', error))
+    }
+
+    const checkOut = (e) => {
+        navigate("/");
     }
 
     // Placeholder title and button for testing purposes
@@ -50,8 +66,7 @@ export default function CheckInOut() {
                             label="Resource"
                             onChange={(e) => {setResource(e.target.value);console.log(e.target.value)}}
                         >
-                            <MenuItem value={"bikes"}>Bikes</MenuItem>
-                            <MenuItem value={"scooters"}>Scooters</MenuItem>
+                            <ResourceList />
                         </Select>
                     </FormControl>
                 </Grid>
@@ -67,7 +82,7 @@ export default function CheckInOut() {
                     />                
                 </Grid>
                 <Grid item xs={3.5}>
-                    <MUIButton fullWidth onClick={() => { goToDashboard();}}> 
+                    <MUIButton fullWidth onClick={() => { checkIn();}}> 
                         Check In      
                     </MUIButton>
                 </Grid>
@@ -83,7 +98,7 @@ export default function CheckInOut() {
                     />
                 </Grid>
                 <Grid item xs={3.5}>
-                    <MUIButton fullWidth onClick={() => { goToDashboard();}}> 
+                    <MUIButton fullWidth length="2px" onClick={() => { checkOut();}}> 
                         Check Out      
                     </MUIButton>
                 </Grid>
