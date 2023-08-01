@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MUIBox } from './MUIBox';
+import Box from '@mui/material/Box';
 import {MUIButton} from './MUIButtons'
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
@@ -21,6 +21,7 @@ export default function MultiCheckInOut() {
 
     // UseEffect hook to update the existing resource List.
     useEffect(() => {    
+        console.log("UseEffect Called")
         APIService.GetResources().then(data =>setTableData(data));
 
         const initialCheckState = mergedDictionary.data
@@ -83,6 +84,7 @@ export default function MultiCheckInOut() {
               setInfo(info)
               console.log(info)
               alert(info.message)
+              accessProject()
             }
           )
           .catch(error => console.log('error', error))
@@ -95,6 +97,7 @@ export default function MultiCheckInOut() {
               setInfo(info)
               console.log(info)
               alert(info.message)
+              accessProject()
             }
           )
           .catch(error => console.log('error', error))
@@ -103,7 +106,16 @@ export default function MultiCheckInOut() {
     // UI for check in and check out with auto-updating resource dropdown
     return (
         <div>
-        <MUIBox>
+        <Box
+        width= "550px"
+        height= "300px"
+        backgroundColor= "white"
+        hover="{
+        backgroundColor: 'primary.main'
+        opacity: [0.9, 0.8, 0.7]"
+        display={'block'}
+        style={{padding:"auto", margin:"auto", alignItems:"left", justifyContent:"center" }}
+        >
         <Grid container spacing={2} style={{padding:"5px", margin:"5px" }}>
           <Grid item xs={8}>
             <TextField
@@ -174,7 +186,7 @@ export default function MultiCheckInOut() {
             <MUIButton onClick={() => {accessProject()}}>
                 Refresh
             </MUIButton>     
-            </MUIBox>
+            </Box>
         </div>
     )
 }
