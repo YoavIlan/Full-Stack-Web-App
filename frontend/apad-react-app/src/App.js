@@ -4,14 +4,10 @@ import React from "react";
 import { LogIn } from './components/LogIn';
 import {MUIProjectSearchBar} from './components/MUIProjectSearchBar'
 
-
-
 function App() {
 
   return (
-
-    <div><LogIn/></div>
-    
+    <div><LogIn/></div> 
   );
 }
 

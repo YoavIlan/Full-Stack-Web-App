@@ -159,7 +159,7 @@ export const LogIn = () => {
         </p>
         <MUIBox>
         <MUITextField label="Email" value={email} onChange={(e) => {setEmail(e.target.value);console.log(e.target.value)}}/>
-        <MUITextField label="Passwords" type="password" value={password}  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}/>
+        <MUITextField label="Password" type="password" value={password}  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}/>
         <MUIButton 
         onClick={() => { handleSubmit(); }}>
           Log  In

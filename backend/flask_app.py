@@ -170,7 +170,8 @@ def check_in():
         for resource in resources:
             resource_collection.update_one({'_id': resource}, {'$inc': {'availability': data[resource]}})
             project_collection.update_one({'_id': id}, {'$inc': {f'resources.{resource}': -1 * data[resource]}})
-        return jsonify({'success': True})
+        return jsonify({'success': True,
+                        "message": "Check In Successful"})
     except Exception as e:
         return f"An error occurred: {e}"
 
@@ -195,7 +196,8 @@ def check_out():
             transaction_amt = requested_amt if resource['availability'] > requested_amt else resource['availability']
             resource_collection.update_one({'_id': resource_id}, {'$inc': {'availability': -1 * transaction_amt}})
             project_collection.update_one({'_id': id}, {'$inc': {f'resources.{resource_id}': transaction_amt}})
-        return jsonify({'success': True})
+        return jsonify({'success': True,
+                        "message": "Check Out Successful"})
     except Exception as e:
         return f"An error occurred: {e}" 
     

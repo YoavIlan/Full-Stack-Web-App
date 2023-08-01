@@ -41,3 +41,8 @@
     transform: rotate(360deg);
   }
 }
+
+/* adds spacing for dashboard table */
+.table-header {
+  padding: 10px; 
+}
