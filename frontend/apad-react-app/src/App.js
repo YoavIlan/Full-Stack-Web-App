@@ -2,15 +2,14 @@ import './App.css';
 import React from "react";
 //if there is a red line here, dont worry it doesnt prevent you from compiling pls not remove
 import { LogIn } from './components/LogIn';
+import { SystemDashboard } from './components/SystemDashboard';
 
 
 
 function App() {
 
   return (
-
-    <div><LogIn/></div>
-    
+    <div><LogIn/></div> 
   );
 }
 
