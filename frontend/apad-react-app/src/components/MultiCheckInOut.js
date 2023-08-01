@@ -32,35 +32,36 @@ export default function MultiCheckInOut() {
     }, [mergedDictionary]);
 
     // Access project and resources function
-    const accessProject = (e) => {
-        APIService.GetResources().then(data =>setTableData(data));
-
-        APIService.AccessProject(id)
-          .then((info) => {setInfo(info);
+    const accessProject = () => {
+        APIService.GetResources().then((data) => {
+          setTableData(data);
       
-            const dataArray = tableData.data && Array.isArray(tableData.data) ? tableData.data : [];
-            const dataObject = dataArray.reduce((acc, item) => {
-              acc[item._id] = { _id: item._id, availability: item.availability, capacity: item.capacity };
-              return acc;
-            }, {});
+          APIService.AccessProject(id)
+            .then((info) => {
+              const dataArray = data.data && Array.isArray(data.data) ? data.data : [];
+              const dataObject = dataArray.reduce((acc, item) => {
+                acc[item._id] = { _id: item._id, availability: item.availability, capacity: item.capacity };
+                return acc;
+              }, {});
       
-            // Add the "checkedout" property to each item in the "tableData" array
-            const updatedTableData = dataArray.map(item => ({
-              ...item,
-              checkedout: info.data.resources && info.data.resources[item._id] ? info.data.resources[item._id] : 0,
-            }));
+              // Add the "checkedout" property to each item in the "data" array
+              const updatedTableData = dataArray.map((item) => ({
+                ...item,
+                checkedout: info.data.resources && info.data.resources[item._id] ? info.data.resources[item._id] : 0,
+              }));
       
-            // Set mergedDictionary with the updated "tableData" array and the updated info data
-            setMergedDictionary({
-              ...info,
-              ...tableData,
-              data: updatedTableData,
-            });
-          })
-          .catch((error) => console.log("Error occurred:", error));
-
-          console.log(mergedDictionary)
-      };                    
+              // Set mergedDictionary with the updated "data" array and the updated info data
+              setMergedDictionary({
+                ...info,
+                data: updatedTableData,
+              });
+      
+              // Now update the "info" state with the updated info data
+              setInfo(info);
+            })
+            .catch((error) => console.log("Error occurred:", error));
+        });
+      };                  
 
       const handleChange = (e, resourceId) => {
         const { value } = e.target;
