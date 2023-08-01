@@ -5,11 +5,55 @@ import { MUIButton } from './MUIButtons';
 import Grid from '@mui/material/Grid';
 import { DataGrid, GridColDef, GridValueGetterParams, GridApi, GridCellValue } from '@mui/x-data-grid';
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 
 
 
 export const MUIProjectSearchBar= ({children, onClick}) => {
+
+  // Navigate method for routing purposes
+  const navigate = useNavigate();
+  const [bikeAvaData, setBikeAvaData] = useState(0)
+  const [bikeCapacity, setBikeCapacity] = useState(0)
+  const [scootersAvaData, setScootersAvaData] = useState(0)
+  const [scootersCapacity, setScootersCapacity] = useState(0)
+
+
+  const handleAccess = (e) => {
+    var bikeAddress = "/api/getresource/bikes"
+    var scootersAddress = "/api/getresource/scooters"
+    var bikeAva;
+    var bikeCapa;
+    var scooterAva;
+    var scooterCapa;
+
+    // fetch(bikeAddress).then(
+    //   res => res.json()
+    // ).then(
+    //   bikes => {
+    //     setBikeAvaData["availability"]
+    //     setBikeCapacity["capacity"]
+    //     console.log(bikes.data["availability"])
+    //     console.log(bikes.data["capacity"])
+    //     console.log(bikeAva)
+    //     console.log(bikeCapa)
+    //   }
+    // )
+
+    fetch(scootersAddress).then(
+      res => res.json()
+    ).then(
+      scooters => {
+        setScootersAvaData(scooters.data["availability"])
+        setScootersCapacity(scooters.data["capacity"])
+        scooterAva = scooters.data["availability"]
+        scooterCapa = scooters.data["capacity"]
+      }
+    )
+    
+    navigate("/project-detail", { state:{data, bikeAvaData, bikeCapacity, scootersAvaData, scootersCapacity} })
+  };
 
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 130 },
@@ -24,23 +68,7 @@ export const MUIProjectSearchBar= ({children, onClick}) => {
     headerName: "",
     sortable: false,
     renderCell: (params) => {
-      const onClick = (e) => {
-        e.stopPropagation(); // don't select this row after clicking
-
-        const api: GridApi = params.api;
-        const thisRow: Record<string, GridCellValue> = {};
-
-        api
-          .getAllColumns()
-          .filter((c) => c.field !== "__check__" && !!c)
-          .forEach(
-            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-          );
-
-        return alert(JSON.stringify(thisRow, null, 4));
-      };
-
-      return < Button onClick={onClick}>Access</Button>;
+      return < Button onClick={() => { handleAccess();}}>Access</Button>;
     }}
   ];  
     //Set up password variable and setter method for password
@@ -98,7 +126,7 @@ export const MUIProjectSearchBar= ({children, onClick}) => {
               Search 
         </MUIButton>
         </Grid>
-        <Grid container justifyContent="flex-start">
+        <Grid container justifyContent="flex-start" style={{paddingBottom:"40px"}}>
               <Grid item>
                   (***Please type in a valid project id***)
               </Grid>
@@ -112,7 +140,7 @@ export const MUIProjectSearchBar= ({children, onClick}) => {
                 paginationModel: { page: 0, pageSize: 5 },
               },
             }}
-            pageSizeOptions={[5, 10]}
+            pageSizeOptions={[]}
 
         />  
       </Container>

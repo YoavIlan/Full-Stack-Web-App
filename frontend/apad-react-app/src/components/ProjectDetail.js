@@ -10,16 +10,20 @@ import '../App.css';
 import { MUIButton } from './MUIButtons';
 import { MUIBox } from './MUIBox';
 import APIService from './APIService'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 
 // Export Login component
-export const SignUp = () => {
+export const ProjectDetail = (params) => {
+    const {state} = useLocation();
+    // const { id, color } = state; // Read values passed on state
+    console.log(state)
     const[email, setEmail] = useState('')
     const[password, setPassword] = useState('')
     // First name and Last name could be used for post MVP
     // const[firstName, setFirstName] = useState('')
     // const[lastName, setLastName] = useState('')
     const [data, setData] = useState([{}])
+
 
     // Navigate method for routing purposes
     const navigate = useNavigate();
@@ -50,6 +54,13 @@ export const SignUp = () => {
     setEmail('')
     setPassword('')
   };
+    const handleCancel = (event) => {
+        navigate("/dashboard")
+    }
+
+    const handleClick = (event) => {
+    navigate("/");
+  };
 
   // The UI setup for the sign up front end
   return (
@@ -65,7 +76,7 @@ export const SignUp = () => {
         >
             <img src={user} className="login-pic" alt="logo" />
           <Typography component="h1" variant="h5">
-            Sign up
+            Project Details
           </Typography>
           <MUIBox component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -96,11 +107,10 @@ export const SignUp = () => {
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  value={email}
+                  id="projectID"
+                  label="Project ID"
+                  name="projectID"
+                  value={state.data.data["_id"]}
                   onChange={(e) => {setEmail(e.target.value);console.log(e.target.value)}}
                 />
               </Grid>
@@ -108,15 +118,60 @@ export const SignUp = () => {
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  value={password}
+                  name="projectName"
+                  label="Project Name"
+                  id="projectName"
+                  value={state.data.data["name"]}
                   onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  name="projectDesc"
+                  label="Project Description"
+                  id="projectDesc"
+                  value={state.data.data["desc"]}
+                  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  name="projectDesc"
+                  label="Bike Capacity"
+                  id="projectDesc"
+                  value={state.bikeCapa}
+                  disabled
+                />
+                {/* <TextField
+                  fullWidth
+                  name="projectDesc"
+                  label="Project Description"
+                  id="projectDesc"
+                  value={state.data.data["desc"]}
+                  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
+                />
+                <TextField
+                  fullWidth
+                  name="projectDesc"
+                  label="Project Description"
+                  id="projectDesc"
+                  value={state.data.data["desc"]}
+                  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
+                /> */}
+              </Grid>  
+              <Grid item xs={6}>
+              <TextField
+                  fullWidth
+                  name="projectDesc"
+                  label="Bikes Availability"
+                  id="projectDesc"
+                //   value={avaBikes}
+                  value={state.bikeAva}
+                  disabled
+                />
+                </Grid>                         
             </Grid>
             <MUIButton
               fullWidth
@@ -124,16 +179,16 @@ export const SignUp = () => {
               onClick={() => { handleSubmit();}}
               sx={{ mt: 3, mb: 2 }}
             >
-              Submit
+              Update
             </MUIButton>
-            {/* Currently this part is not working */}
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
+            <MUIButton
+              
+              variant="contained"
+              onClick={() => { handleCancel();}}
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Cancel
+            </MUIButton>
           </MUIBox>
         </MUIBox>
 

@@ -1,6 +1,8 @@
 import React from "react";
 import {MUIButton} from './MUIButtons'
 import { useNavigate } from "react-router-dom";
+import {MUIProjectSearchBar} from './MUIProjectSearchBar'
+import { MUIBox } from './MUIBox';
 
 export default function Dashboard() {
     
@@ -13,12 +15,16 @@ export default function Dashboard() {
 
     // Placeholder title and button for testing purposes
     return (
-        <div>
-        <h1> This is the dashboard </h1>
+        <div className="App">
+        {/* <header className="App-header"> */}
+          <h1><code>The Main Dashboard</code></h1>
+
+          <MUIProjectSearchBar/>
         <MUIButton
         onClick={() => { handleClick(); }}>
           Return to Log In
-        </MUIButton>
-        </div>
+        </MUIButton>            
+        {/* </header> */}
+        </div>        
     )
 }
