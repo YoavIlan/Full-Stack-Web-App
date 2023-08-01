@@ -88,7 +88,6 @@ export default function MultiCheckInOut() {
             info => {
               setInfo(info)
               console.log(info)
-              alert(info.message)
               accessProject()
             }
           )
@@ -101,7 +100,6 @@ export default function MultiCheckInOut() {
             info => {
               setInfo(info)
               console.log(info)
-              alert(info.message)
               accessProject()
             }
           )
