@@ -14,10 +14,8 @@ import Paper from '@mui/material/Paper';
 
 export default function MultiCheckInOut() {
     const[id, setId] = useState('')
-    const[resource, setResource] = useState('')
     const[check, setCheck] = useState([])
     const [info, setInfo] = useState([{}])
-    const[resourcesData, setResourcesData] = useState([]);
     const [tableData, setTableData] = useState([{}])
     const [mergedDictionary, setMergedDictionary] = useState({})
 
