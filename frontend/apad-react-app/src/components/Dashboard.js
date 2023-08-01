@@ -2,6 +2,7 @@ import {MUIButton} from './MUIButtons'
 import { useNavigate } from "react-router-dom";
 import MultiCheckInOut from "./MultiCheckInOut";
 import { MUIBox } from './MUIBox';
+import Table from './Table'
 
 export default function Dashboard() {
 
@@ -17,15 +18,11 @@ export default function Dashboard() {
       navigate("/project-creation");
     }
 
-    // navigate to project creation page  
-    const checkInOut = () => {
-      navigate("/check-in-out");
-    }
-
     // Placeholder title and button for testing purposes
     return (
         <div>
         <h1> Dashboard </h1>
+        <Table />
         <MUIButton
         onClick={() => { handleClick()}}>
           Return to Log In
@@ -33,10 +30,6 @@ export default function Dashboard() {
         <MUIButton
         onClick={() => {createProject()}}>
           Create a New Project
-        </MUIButton>
-        <MUIButton
-        onClick={() => {checkInOut()}}>
-          Check In/Out Resources
         </MUIButton>
         <MUIBox>
         <MultiCheckInOut/>
