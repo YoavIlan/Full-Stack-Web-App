@@ -43,9 +43,6 @@ export default function MultiCheckInOut() {
               return acc;
             }, {});
       
-            // Create a copy of info.data and update the resources property
-            const updatedInfoData = { ...info.data, resources: { ...info.data.resources, ...dataObject } };
-      
             // Add the "checkedout" property to each item in the "tableData" array
             const updatedTableData = dataArray.map(item => ({
               ...item,
@@ -57,7 +54,6 @@ export default function MultiCheckInOut() {
               ...info,
               ...tableData,
               data: updatedTableData,
-              dataObject: updatedInfoData,
             });
           })
           .catch((error) => console.log("Error occurred:", error));
