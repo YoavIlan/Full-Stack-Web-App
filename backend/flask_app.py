@@ -136,7 +136,7 @@ def create_project():
     API function to create a new project
     """
     try:
-        id = request.json['id']
+        id = request.json['_id']
         name = request.json['name']
         desc = request.json['description']
         resources = {'bikes': 0, 'scooters': 0}
@@ -146,10 +146,11 @@ def create_project():
                                     'desc': desc,
                                     'resources': resources})
         
-        return jsonify({'success': True})
+        return jsonify({'success': True,
+                        "message": "Project Created Successfully"})
     except Exception as e:
         return jsonify({"success": False,
-                        "error": "Project ID taken"})
+                        "message": "Project ID taken"})
 
 
 @app.route('/api/checkin', methods=['POST'])

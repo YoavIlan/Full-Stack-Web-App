@@ -13,6 +13,11 @@ export default function Dashboard() {
         navigate("/");
       };
 
+    // navigate to project creation page  
+    const createProject = (event) => {
+      navigate("/project-creation");
+    }
+
     // Placeholder title and button for testing purposes
     return (
         <div className="App">
@@ -25,6 +30,12 @@ export default function Dashboard() {
           Return to Log In
         </MUIButton>            
         {/* </header> */}
-        </div>        
+        {/* </div>        
+        </MUIButton> */}
+        <MUIButton
+        onClick={() => {createProject();}}>
+          Create a New Project
+        </MUIButton>
+        </div>
     )
 }

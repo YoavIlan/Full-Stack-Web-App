@@ -5,6 +5,7 @@ import { LogIn } from './components/LogIn';
 import {MUIProjectSearchBar} from './components/MUIProjectSearchBar'
 
 
+
 function App() {
 
   return (
