@@ -14,6 +14,7 @@ import Paper from '@mui/material/Paper';
 
 export default function MultiCheckInOut() {
     const[id, setId] = useState('')
+    const[projectName, setProjectName] = useState('')
     const[check, setCheck] = useState([])
     const [info, setInfo] = useState([{}])
     const [tableData, setTableData] = useState([{}])
@@ -36,30 +37,33 @@ export default function MultiCheckInOut() {
         APIService.GetResources().then((data) => {
           setTableData(data);
       
-          APIService.AccessProject(id)
-            .then((info) => {
-              const dataArray = data.data && Array.isArray(data.data) ? data.data : [];
-              const dataObject = dataArray.reduce((acc, item) => {
-                acc[item._id] = { _id: item._id, availability: item.availability, capacity: item.capacity };
-                return acc;
-              }, {});
-      
-              // Add the "checkedout" property to each item in the "data" array
-              const updatedTableData = dataArray.map((item) => ({
-                ...item,
-                checkedout: info.data.resources && info.data.resources[item._id] ? info.data.resources[item._id] : 0,
-              }));
-      
-              // Set mergedDictionary with the updated "data" array and the updated info data
-              setMergedDictionary({
-                ...info,
-                data: updatedTableData,
-              });
-      
-              // Now update the "info" state with the updated info data
-              setInfo(info);
-            })
-            .catch((error) => console.log("Error occurred:", error));
+        APIService.AccessProject(id)
+        .then((info) => {
+            
+            setProjectName(info.data.name)
+
+            const dataArray = data.data && Array.isArray(data.data) ? data.data : [];
+            const dataObject = dataArray.reduce((acc, item) => {
+            acc[item._id] = { _id: item._id, availability: item.availability, capacity: item.capacity };
+            return acc;
+            }, {});
+    
+            // Add the "checkedout" property to each item in the "data" array
+            const updatedTableData = dataArray.map((item) => ({
+            ...item,
+            checkedout: info.data.resources && info.data.resources[item._id] ? info.data.resources[item._id] : 0,
+            }));
+    
+            // Set mergedDictionary with the updated "data" array and the updated info data
+            setMergedDictionary({
+            ...info,
+            data: updatedTableData,
+            });
+    
+            // Now update the "info" state with the updated info data
+            setInfo(info);
+        })
+        .catch((error) => console.log("Error occurred:", error));
         });
       };                  
 
@@ -135,7 +139,8 @@ export default function MultiCheckInOut() {
             </MUIButton>
           </Grid>
         </Grid>
-        <h2> Resource Management </h2>
+        <h2> Resource Management</h2>
+        <h3> Selected Project: {projectName}</h3>
             
             {(typeof tableData.data === "undefined") ? (
                 <p>Loading...</p>
@@ -184,9 +189,6 @@ export default function MultiCheckInOut() {
             <MUIButton onClick={() => {checkOut()}}>
                 Check Out
             </MUIButton> 
-            <MUIButton onClick={() => {accessProject()}}>
-                Refresh
-            </MUIButton>     
             </Box>
         </div>
     )
