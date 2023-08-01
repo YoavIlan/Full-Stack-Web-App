@@ -11,7 +11,6 @@ function App() {
   return (
 
     <div><LogIn/></div>
-    // <div><MUIProjectSearchBar/></div>
     
   );
 }

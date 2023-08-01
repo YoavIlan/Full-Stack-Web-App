@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import LogIn from './components/LogIn'
 import {SignUp} from './components/SignUp'
 import Dashboard from './components/Dashboard'
 import { ProjectDetail } from './components/ProjectDetail';

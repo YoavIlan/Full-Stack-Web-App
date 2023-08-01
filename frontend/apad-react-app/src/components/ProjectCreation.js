@@ -8,6 +8,12 @@ import APIService from './APIService'
 import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import { Container } from "@mui/material";
+import projectCreation from '../projectCreation.jpg';
 
 // Export the Project Creation component
 export const ProjectCreation = () => {
@@ -26,7 +32,14 @@ export const ProjectCreation = () => {
         data => {
           setData(data)
           console.log(data)
-          alert(data.message)
+          if (data.success) {
+            alert(data.message)
+            // navigate("/dashboard")
+            navigate("/project-detail", { state:{data} })
+          }
+          else {
+            alert(data.message)
+          }          
         }
       )
       .catch(error => console.log('error', error))
@@ -52,16 +65,126 @@ const goToDashboard = (event) => {
   // Project Creation UI setup
     return (
       <div className="App">
-        <CssBaseline />
+        <Container component="main" maxWidth="lg">
+            <Box
+              sx={{
+                marginTop: 8,
+              }}
+            >
+              <Grid container>
+                <CssBaseline />
+                <Grid
+                  item
+                  xs={false}
+                  sm={4}
+                  md={7}
+                  sx={{
+                    backgroundImage: `url(${projectCreation})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundColor: (t) =>
+                      t.palette.mode === "light"
+                        ? t.palette.grey[50]
+                        : t.palette.grey[900],
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+                <Grid
+                  item
+                  xs={12}
+                  sm={8}
+                  md={5}
+                  component={Paper}
+                  elevation={6}
+                  square
+                >
+                  <Box
+                    sx={{
+                      my: 8,
+                      mx: 4,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography component="h1" variant="h5">
+                    Create a New Project
+                    </Typography>
+                    <Box
+                      noValidate
+                      sx={{ mt: 1 }}
+                    >
+                      <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="Project ID" 
+                        label="Project ID"
+                        name = "Project ID"
+                        autoComplete="Project ID"
+                        value={_id}
+                        onChange={(e) => {setId(e.target.value);console.log(e.target.value)}}
+                      />
+                      <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="Project Name" 
+                        label="Project Name"
+                        name = "Project Name"
+                        autoComplete="Project Name"
+                        value={name}
+                        onChange={(e) => {setName(e.target.value);console.log(e.target.value)}}                        
+                      />
+                      <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="Project Description" 
+                        label="Project Description"
+                        name = "Project Description"
+                        autoComplete="Project Description"
+                        value={description}
+                        onChange={(e) => {setDescription(e.target.value);console.log(e.target.value)}}/>        
+                      <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        onClick={() => { handleSubmit();}}
+                      >
+                        Create Project
+                      </Button>
+                      <Button 
+                      onClick={() => { goToDashboard();}}
+                      > 
+                        Cancel      
+                      </Button>
+                      {/* <Grid container>
+                        <Grid item>
+                          <Link href="#" variant="body2" onClick={() => { handleClick(); }}>
+                            {"Don't have an account? Sign Up"}
+                            
+                          </Link>
+                        </Grid>
+                      </Grid> */}
+                    </Box>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+          </Container>
+
+        {/* <CssBaseline />
           <Typography component="h1" variant="h5">
             Create a New Project
           </Typography>
           
           <MUIBox component="form" noValidate sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid item xs={12}> */}
             {/* creat 3 text fields for user input*/}
-          <TextField
+          {/* <TextField
             required
             fullWidth
             id="Project Name" 
@@ -96,9 +219,9 @@ const goToDashboard = (event) => {
             onChange={(e) => {setDescription(e.target.value);console.log(e.target.value)}}
             />
             </Grid>
-          </Grid>
+          </Grid> */}
           {/* create buttons */}
-          <MUIButton
+          {/* <MUIButton
           fullWidth
           variant="contained"
           onClick={() => { handleSubmit();}}
@@ -110,7 +233,7 @@ const goToDashboard = (event) => {
           > 
             Cancel      
           </MUIButton>
-          </MUIBox>
+          </MUIBox> */}
       </div>
       
     );

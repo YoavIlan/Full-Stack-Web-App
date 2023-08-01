@@ -145,8 +145,10 @@ def create_project():
                                     'name': name,
                                     'desc': desc,
                                     'resources': resources})
+        result = project_collection.find_one({'_id': id})
         
         return jsonify({'success': True,
+                        'data': result,
                         "message": "Project Created Successfully"})
     except Exception as e:
         return jsonify({"success": False,

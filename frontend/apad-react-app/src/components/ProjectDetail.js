@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useState } from "react";
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import user from '../user.png';
@@ -11,6 +10,11 @@ import { MUIButton } from './MUIButtons';
 import { MUIBox } from './MUIBox';
 import APIService from './APIService'
 import { useNavigate, useLocation} from "react-router-dom";
+import projectDetail from '../projectDetail.jpg';
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import { Container } from "@mui/material";
 
 // Export Login component
 export const ProjectDetail = (params) => {
@@ -65,7 +69,140 @@ export const ProjectDetail = (params) => {
   // The UI setup for the sign up front end
   return (
     <div className="App">
-        <CssBaseline />
+        <Container component="main" maxWidth="lg">
+            <Box
+              sx={{
+                marginTop: 8,
+              }}
+            >
+              <Grid container>
+                <CssBaseline />
+                <Grid
+                  item
+                  xs={false}
+                  sm={4}
+                  md={7}
+                  sx={{
+                    backgroundImage: `url(${projectDetail})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundColor: (t) =>
+                      t.palette.mode === "light"
+                        ? t.palette.grey[50]
+                        : t.palette.grey[900],
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+                <Grid
+                  item
+                  xs={12}
+                  sm={8}
+                  md={5}
+                  component={Paper}
+                  elevation={6}
+                  square
+                >
+                  <Box
+                    sx={{
+                      my: 8,
+                      mx: 4,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography component="h1" variant="h5">
+                    Project Details
+                    </Typography>
+                    <Box
+                      noValidate
+                      sx={{ mt: 1 }}
+                    >
+                      <TextField
+                        margin="normal"
+                        variant="standard"
+                        fullWidth
+                        id="Project ID" 
+                        label="Project ID"
+                        name = "Project ID"
+                        value={state.data.data["_id"]}
+                        InputProps={{
+                          readOnly: true,
+                        }}
+                      />
+                      <TextField
+                        margin="normal"
+                        variant="standard"
+                        fullWidth
+                        id="Project Name" 
+                        label="Project Name"
+                        name = "Project Name"
+                        value={state.data.data["name"]}
+                        InputProps={{
+                          readOnly: true,
+                        }}                       
+                      />
+                      <TextField
+                        margin="normal"
+                        variant="standard"
+                        fullWidth
+                        id="Project Description" 
+                        label="Project Description"
+                        name = "Project Description"
+                        value={state.data.data["desc"]}
+                        InputProps={{
+                          readOnly: true,
+                        }}/> 
+                    {/* <Grid> */}
+                      <Grid item xs={6}>
+                        <TextField
+                          variant="standard"
+                          fullWidth
+                          name="projectDesc"
+                          label="Bike Current Usage"
+                          id="projectDesc"
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                          value={state.data.data.resources["bikes"]}
+                        /> 
+                      {/* <Grid item xs={6}> */}
+                        <TextField
+                          variant="standard"
+                          fullWidth
+                          name="projectDesc"
+                          label="Scooters Current Usage"
+                          id="projectDesc"
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                          value={state.data.data.resources["scooters"]}
+                        />
+                      {/* </Grid>
+                      </Grid>                          */}
+                  </Grid>       
+                      <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        onClick={() => { handleSubmit();}}
+                      >
+                        Update
+                      </Button>
+                      <Button 
+                      onClick={() => { handleCancel();}}
+                      > 
+                        Cancel      
+                      </Button>
+                    </Box>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+          </Container>
+
+        {/* <CssBaseline />
         <MUIBox
           sx={{
             marginTop: 8,
@@ -78,98 +215,71 @@ export const ProjectDetail = (params) => {
           <Typography component="h1" variant="h5">
             Project Details
           </Typography>
-          <MUIBox component="form" noValidate sx={{ mt: 3 }}>
+          <MUIBox component="span" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-
-            {/* Below is the text field for first name and last name, could use it for post MVP but commented out for now */}
-              {/* <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid> */}
-              <Grid item xs={12}>
-                <TextField
-                  required
+                  variant="standard"
                   fullWidth
                   id="projectID"
                   label="Project ID"
                   name="projectID"
                   value={state.data.data["_id"]}
-                  onChange={(e) => {setEmail(e.target.value);console.log(e.target.value)}}
+                  InputProps={{
+                    readOnly: true,
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
+                  variant="standard"
                   fullWidth
                   name="projectName"
                   label="Project Name"
                   id="projectName"
                   value={state.data.data["name"]}
-                  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
+                  InputProps={{
+                    readOnly: true,
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   name="projectDesc"
                   label="Project Description"
                   id="projectDesc"
                   value={state.data.data["desc"]}
-                  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
+                  InputProps={{
+                    readOnly: true,
+                  }}
                 />
               </Grid>
               <Grid item xs={6}>
                 <TextField
+                  variant="standard"
                   fullWidth
                   name="projectDesc"
-                  label="Bike Capacity"
+                  label="Bike Current Usage"
                   id="projectDesc"
-                  value={state.bikeCapa}
-                  disabled
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value={state.data.data.resources["bikes"]}
                 />
-                {/* <TextField
-                  fullWidth
-                  name="projectDesc"
-                  label="Project Description"
-                  id="projectDesc"
-                  value={state.data.data["desc"]}
-                  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
-                />
-                <TextField
-                  fullWidth
-                  name="projectDesc"
-                  label="Project Description"
-                  id="projectDesc"
-                  value={state.data.data["desc"]}
-                  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
-                /> */}
               </Grid>  
               <Grid item xs={6}>
               <TextField
+                  variant="standard"
                   fullWidth
                   name="projectDesc"
-                  label="Bikes Availability"
+                  label="Scooters Current Usage"
                   id="projectDesc"
-                //   value={avaBikes}
-                  value={state.bikeAva}
-                  disabled
+                  InputProps={{
+                    readOnly: true,
+                  }}
+                  value={state.data.data.resources["scooters"]}
                 />
                 </Grid>                         
             </Grid>
@@ -182,7 +292,6 @@ export const ProjectDetail = (params) => {
               Update
             </MUIButton>
             <MUIButton
-              
               variant="contained"
               onClick={() => { handleCancel();}}
               sx={{ mt: 3, mb: 2 }}
@@ -190,7 +299,7 @@ export const ProjectDetail = (params) => {
               Cancel
             </MUIButton>
           </MUIBox>
-        </MUIBox>
+        </MUIBox> */}
 
     </div>
   );
