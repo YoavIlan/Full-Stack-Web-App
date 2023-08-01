@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 export const MUIBox = ({ children}) => {
   return (
     <Box
-    width= "450px"
+    width= "550px"
     height= "300px"
     backgroundColor= "white"
     hover="{

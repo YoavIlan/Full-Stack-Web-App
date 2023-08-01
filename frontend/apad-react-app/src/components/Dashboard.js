@@ -1,8 +1,10 @@
 import {MUIButton} from './MUIButtons'
 import { useNavigate } from "react-router-dom";
+import MultiCheckInOut from "./MultiCheckInOut";
+import { MUIBox } from './MUIBox';
 
 export default function Dashboard() {
-    
+
     // Navigate method for routing purposes
     const navigate = useNavigate();
     
@@ -23,7 +25,7 @@ export default function Dashboard() {
     // Placeholder title and button for testing purposes
     return (
         <div>
-        <h1> This is the dashboard </h1>
+        <h1> Dashboard </h1>
         <MUIButton
         onClick={() => { handleClick()}}>
           Return to Log In
@@ -36,6 +38,9 @@ export default function Dashboard() {
         onClick={() => {checkInOut()}}>
           Check In/Out Resources
         </MUIButton>
+        <MUIBox>
+        <MultiCheckInOut/>
+        </MUIBox>
         </div>
     )
 }

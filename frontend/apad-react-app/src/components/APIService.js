@@ -58,4 +58,11 @@ export default class APIService{
         .catch(error => console.log(error))
     }
 
+    static AccessProject(proj_id){
+        var address = "/api/getproj"
+        return fetch(address+"/"+proj_id)
+        .then(response=>response.json())
+        .catch(error => console.log(error))
+    }
+
 }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {MUITextField} from './TextFields';
 import { MUIBox } from './MUIBox';
 import {MUIButton} from './MUIButtons'
 import { useNavigate } from "react-router-dom";
@@ -24,7 +23,7 @@ export default function CheckInOut() {
         navigate("/dashboard");
     }
 
-    // UseEffect function to update the existing resource List.
+    // UseEffect hook to update the existing resource List.
     useEffect(() => {
         APIService.GetResources()
         .then(response => {
