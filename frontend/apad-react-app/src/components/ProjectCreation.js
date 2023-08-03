@@ -13,7 +13,7 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
-import projectCreation from '../projectCreation.jpg';
+import projectCreation from '../assets/projectCreation.jpg';
 
 // Export the Project Creation component
 export const ProjectCreation = () => {

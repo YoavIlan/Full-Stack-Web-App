@@ -1,7 +1,7 @@
 import {MUIButton} from './MUIButtons'
 import { useNavigate } from "react-router-dom";
 import Table from './Table'
-import maindashboard from '../maindashboard.jpg';
+import maindashboard from '../assets/maindashboard.jpg';
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";

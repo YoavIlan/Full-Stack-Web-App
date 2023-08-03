@@ -5,12 +5,11 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import '../App.css';
 import { useNavigate, useLocation} from "react-router-dom";
-import projectDetail from '../projectDetail.jpg';
+import projectDetail from '../assets/projectDetail.jpg';
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
-import MultiCheckInOut from "./MultiCheckInOut";
 import CheckInOut from './CheckInOut';
 
 // Export Login component
