@@ -6,8 +6,6 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import '../App.css';
-import { MUIButton } from './MUIButtons';
-import { MUIBox } from './MUIBox';
 import APIService from './APIService'
 import { useNavigate } from "react-router-dom";
 import uttowersignup from '../assets/uttowersignup.jpg';

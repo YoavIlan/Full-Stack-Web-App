@@ -1,7 +1,4 @@
 import '../App.css';
-import { MUIButton } from './MUIButtons';
-import {MUITextField} from './TextFields';
-import { MUIBox } from './MUIBox';
 import React, { useState } from "react";
 import uttower from '../assets/uttower.jpg';
 import { useNavigate } from "react-router-dom";
