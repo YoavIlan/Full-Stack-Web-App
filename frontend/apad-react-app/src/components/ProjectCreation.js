@@ -115,7 +115,7 @@ const goToDashboard = (event) => {
                         name = "Project ID"
                         autoComplete="Project ID"
                         value={_id}
-                        onChange={(e) => {setId(e.target.value);console.log(e.target.value)}}
+                        onChange={(e) => setId(e.target.value)}
                       />
                       <TextField
                         margin="normal"
@@ -126,7 +126,7 @@ const goToDashboard = (event) => {
                         name = "Project Name"
                         autoComplete="Project Name"
                         value={name}
-                        onChange={(e) => {setName(e.target.value);console.log(e.target.value)}}                        
+                        onChange={(e) => setName(e.target.value)}                        
                       />
                       <TextField
                         margin="normal"
@@ -137,7 +137,7 @@ const goToDashboard = (event) => {
                         name = "Project Description"
                         autoComplete="Project Description"
                         value={description}
-                        onChange={(e) => {setDescription(e.target.value);console.log(e.target.value)}}/>        
+                        onChange={(e) => setDescription(e.target.value)}/>        
                       <Button
                         type="submit"
                         fullWidth
@@ -166,66 +166,6 @@ const goToDashboard = (event) => {
               </Grid>
             </Box>
           </Container>
-
-        {/* <CssBaseline />
-          <Typography component="h1" variant="h5">
-            Create a New Project
-          </Typography>
-          
-          <MUIBox component="form" noValidate sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-          <Grid item xs={12}> */}
-            {/* creat 3 text fields for user input*/}
-          {/* <TextField
-            required
-            fullWidth
-            id="Project Name" 
-            label="Project Name"
-            name = "Project Name"
-            autoComplete="Project Name"
-            value={name}
-            onChange={(e) => {setName(e.target.value);console.log(e.target.value)}}
-            />
-            </Grid>
-            <Grid item xs={12}>
-           <TextField
-            required
-            fullWidth
-            id="Project ID" 
-            label="Project ID"
-            name = "Project ID"
-            autoComplete="Project ID"
-            value={_id}
-            onChange={(e) => {setId(e.target.value);console.log(e.target.value)}}
-            />
-            </Grid>
-            <Grid item xs={12}>
-           <TextField
-            required
-            fullWidth
-            id="Project Description" 
-            label="Project Description"
-            name = "Project Description"
-            autoComplete="Project Description"
-            value={description}
-            onChange={(e) => {setDescription(e.target.value);console.log(e.target.value)}}
-            />
-            </Grid>
-          </Grid> */}
-          {/* create buttons */}
-          {/* <MUIButton
-          fullWidth
-          variant="contained"
-          onClick={() => { handleSubmit();}}
-          sx={{ mt: 3, mb: 2 }}>
-            Create Project
-          </MUIButton>
-          <MUIButton 
-          onClick={() => { goToDashboard();}}
-          > 
-            Cancel      
-          </MUIButton>
-          </MUIBox> */}
       </div>
       
     );

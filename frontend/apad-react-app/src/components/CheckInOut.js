@@ -25,7 +25,6 @@ const CheckInOut = () => {
     const [mergedDictionary, setMergedDictionary] = useState([{}])
 
     useEffect(() => {
-        // console.log(state.data.data)
         setId(state.data.data._id)
         setProjectInfo(state.data.data)
         combineResourceProjectData()
@@ -46,7 +45,6 @@ const CheckInOut = () => {
                     ...resource, checkedOut: projData.data.resources[resource._id]
                 }))
                 setMergedDictionary(combinedData)
-                // console.log(combinedData)
                 const emptyRequest = resourceData.data.reduce((acc, item) => {
                     acc[item._id] = 0
                     return acc

@@ -28,9 +28,7 @@ export const MUIProjectSearchBar= ({}) => {
       ).then(
         data => {
           setData(data)
-          // console.log(data)
           if(data.success){
-            // alert(data.message)
             navigate("/project-detail", { state:{data} })
           }
 

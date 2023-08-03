@@ -39,7 +39,6 @@ export const LogIn = () => {
     ).then(
       data => {
         setData(data)
-        console.log(data)
         if (data.success) {
           navigate("/dashboard")
         }
@@ -111,7 +110,7 @@ export const LogIn = () => {
                         autoComplete="email"
                         autoFocus
                         value={email}
-                        onChange={(e) => {setEmail(e.target.value);console.log(e.target.value)}}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                       <TextField
                         margin="normal"
@@ -122,7 +121,7 @@ export const LogIn = () => {
                         type="password"
                         id="password"
                         value={password}  
-                        onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
+                        onChange={(e) => setPassword(e.target.value)}
                         autoComplete="current-password"
                       />
                       <Button
@@ -148,24 +147,6 @@ export const LogIn = () => {
               </Grid>
             </Box>
           </Container>
-      {/* <header className="App-header">
-        <img src={user} className="login-pic" alt="logo" />
-        <p>
-          <code>Sign In</code>
-        </p>
-        <MUIBox>
-        <MUITextField label="Email" value={email} onChange={(e) => {setEmail(e.target.value);console.log(e.target.value)}}/>
-        <MUITextField label="Password" type="password" value={password}  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}/>
-        <MUIButton 
-        onClick={() => { handleSubmit(); }}>
-          Log  In
-        </MUIButton>
-        <MUIButton
-        onClick={() => { handleClick(); }}>
-          Sign Up       
-        </MUIButton>
-        </MUIBox>
-      </header> */}
     </div>
     
   );

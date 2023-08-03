@@ -112,7 +112,7 @@ export const SignUp = () => {
                         autoComplete="email"
                         autoFocus
                         value={email}
-                        onChange={(e) => {setEmail(e.target.value);console.log(e.target.value)}}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                       <TextField
                         margin="normal"
@@ -123,7 +123,7 @@ export const SignUp = () => {
                         type="password"
                         id="password"
                         value={password}  
-                        onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
+                        onChange={(e) => setPassword(e.target.value)}
                         autoComplete="current-password"
                       />
                       <Button
@@ -149,89 +149,6 @@ export const SignUp = () => {
               </Grid>
             </Box>
           </Container>
-      
-        {/* <CssBaseline />
-        <MUIBox
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-            <img src={user} className="login-pic" alt="logo" />
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <MUIBox component="form" noValidate sx={{ mt: 3 }}>
-            <Grid container spacing={2}> */}
-
-            {/* Below is the text field for first name and last name, could use it for post MVP but commented out for now */}
-              {/* <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => {setEmail(e.target.value);console.log(e.target.value)}}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  value={password}
-                  onChange={(e) => {setPassword(e.target.value);console.log(e.target.value)}}
-                />
-              </Grid>
-            </Grid>
-            <MUIButton
-              fullWidth
-              variant="contained"
-              onClick={() => { handleSubmit();}}
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Submit
-            </MUIButton> */}
-            {/* Currently this part is not working */}
-            {/* <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </MUIBox>
-        </MUIBox> */}
 
     </div>
   );
