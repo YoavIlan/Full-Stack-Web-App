@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Box from '@mui/material/Box';
 import {MUIButton} from './MUIButtons'
-import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import APIService from './APIService'
 import Table from '@mui/material/Table';
@@ -11,8 +9,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {useLocation} from "react-router-dom";
 
 export default function MultiCheckInOut() {
+    const {state} = useLocation();
     const[id, setId] = useState('')
     const[projectName, setProjectName] = useState('')
     const[check, setCheck] = useState([])
@@ -30,23 +30,25 @@ export default function MultiCheckInOut() {
       : [];
     setCheck(initialCheckState);
 
-    }, [mergedDictionary]);
+    //Added access project here so it will retrieve project resources data every time page reload
+    accessProject()
+  }, []);
+    // }, [mergedDictionary]); //Commented out because it will cause infinite loop
 
     // Access project and resources function
     const accessProject = () => {
         APIService.GetResources().then((data) => {
           setTableData(data);
-      
-        APIService.AccessProject(id)
+        APIService.AccessProject(state.data.data["_id"])
         .then((info) => {
             
             setProjectName(info.data.name)
 
             const dataArray = data.data && Array.isArray(data.data) ? data.data : [];
-            const dataObject = dataArray.reduce((acc, item) => {
-            acc[item._id] = { _id: item._id, availability: item.availability, capacity: item.capacity };
-            return acc;
-            }, {});
+            // const dataObject = dataArray.reduce((acc, item) => {
+            // acc[item._id] = { _id: item._id, availability: item.availability, capacity: item.capacity };
+            // return acc;
+            // }, {});
     
             // Add the "checkedout" property to each item in the "data" array
             const updatedTableData = dataArray.map((item) => ({
@@ -109,7 +111,7 @@ export default function MultiCheckInOut() {
     // UI for check in and check out with auto-updating resource dropdown
     return (
         <div>
-        <Box
+        {/* <Box
         width= "550px"
         height= "300px"
         backgroundColor= "white"
@@ -118,8 +120,8 @@ export default function MultiCheckInOut() {
         opacity: [0.9, 0.8, 0.7]"
         display={'block'}
         style={{padding:"auto", margin:"auto", alignItems:"left", justifyContent:"center" }}
-        >
-        <Grid container spacing={2} style={{padding:"5px", margin:"5px" }}>
+        > */}
+        {/* <Grid container spacing={2} style={{padding:"5px", margin:"5px" }}>
           <Grid item xs={8}>
             <TextField
               required
@@ -136,16 +138,18 @@ export default function MultiCheckInOut() {
               Access
             </MUIButton>
           </Grid>
-        </Grid>
-        <h2> Resource Management</h2>
-        <h3> Selected Project: {projectName}</h3>
-            
+        </Grid> */}
+        {/* <h2> Resource Management</h2>
+        <h3> Selected Project: {projectName}</h3> */}
+                        {/* <MUIButton onClick={() => {accessProject()}}>
+              Access
+            </MUIButton> */}
             {(typeof tableData.data === "undefined") ? (
                 <p>Loading...</p>
             ): (
             
             <TableContainer component={Paper} style={{margin:"10px" }}>
-                <Table sx={{ minWidth: 10 }} aria-label="simple table">
+                <Table sx={{ minWidth: 6 }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
                         <TableCell>Resource</TableCell>
@@ -187,7 +191,6 @@ export default function MultiCheckInOut() {
             <MUIButton onClick={() => {checkOut()}}>
                 Check Out
             </MUIButton> 
-            </Box>
         </div>
     )
 }
