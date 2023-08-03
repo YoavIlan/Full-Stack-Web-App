@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import Blueprint, request, jsonify
+from flask_cors import CORS, cross_origin
 import uuid
 import pymongo
 from pymongo import MongoClient
@@ -8,7 +9,9 @@ import os
 
 load_dotenv()
 DBSTRING = os.getenv('DBSTRING')
-app = Flask(__name__)
+app = Flask(__name__, static_folder='./frontend/apad-react-app/build/', static_url_path='/')
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 cluster = MongoClient(DBSTRING)
 db = cluster['db']
@@ -35,6 +38,7 @@ def _checkin_is_valid(id, transaction):
     return True
     
 @app.route('/api/adduser', methods=['POST'])
+@cross_origin()
 def create_user():
     """
     API function to create a new user
@@ -60,6 +64,7 @@ def create_user():
 
 # get a user and check for email and password matching
 @app.route('/api/getuser/<email>/<password>', methods=['GET'])
+@cross_origin()
 def validate_user(email, password):
     """
     API function to validate user credentials
@@ -83,6 +88,7 @@ def validate_user(email, password):
         return f"An error occurred: {e}"
     
 @app.route('/api/getresource/<resource>', methods=['GET'])
+@cross_origin()
 def get_resource(resource):
     """
     API function to get a specified resource
@@ -99,6 +105,7 @@ def get_resource(resource):
 
 # api call to get all resources    
 @app.route('/api/getresources', methods=['GET'])
+@cross_origin()
 def get_resources():
     """
     API function to get a list of all resources in the system
@@ -114,6 +121,7 @@ def get_resources():
         return f"An error occurred: {e}"
     
 @app.route('/api/getproj/<projectid>', methods=['GET'])
+@cross_origin()
 def get_project(projectid):
     """
     API function to get a specific project
@@ -131,6 +139,7 @@ def get_project(projectid):
         return f"An error occurred: {e}"
 
 @app.route('/api/makeproject', methods=['POST'])
+@cross_origin()
 def create_project():
     """
     API function to create a new project
@@ -156,6 +165,7 @@ def create_project():
 
 
 @app.route('/api/checkin', methods=['POST'])
+@cross_origin()
 def check_in():
     """
     API function to check in resources from a project to the resource pool
@@ -176,6 +186,7 @@ def check_in():
         return f"An error occurred: {e}"
 
 @app.route('/api/checkout', methods=['POST'])
+@cross_origin()
 def check_out():
     """
     API function to check out resources from the resource pool to a project
@@ -200,7 +211,13 @@ def check_out():
                         "message": "Check Out Successful"})
     except Exception as e:
         return f"An error occurred: {e}" 
-    
+
+@app.route('/')
+@cross_origin()
+def index():
+    return app.send_static_file('index.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
