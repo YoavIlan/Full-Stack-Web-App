@@ -4,9 +4,10 @@ import { useState } from "react";
 import { MUIButton } from './MUIButtons';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from "react-router-dom";
+import Typography from '@mui/material/Typography';
 
 
-export const MUIProjectSearchBar= ({children, onClick}) => {
+export const MUIProjectSearchBar= ({}) => {
 
     // Navigate method for routing purposes
     const navigate = useNavigate();
@@ -41,24 +42,27 @@ export const MUIProjectSearchBar= ({children, onClick}) => {
   }
   return (
     <>
-      <Container maxWidth="md" sx={{ mt: 20 }}>
+      <Container maxWidth="md" sx={{ mt: 2, width: "100%" }} >
         <Grid>
-        <TextField  type="search" id="search" label="Search For Projects" sx={{ width: 750 }} 
+        <TextField  type="search" id="search" label="Search For Projects"  sx={{width: "100%" }}
         onChange={(e) => {setProjectID(e.target.value);console.log(e.target.value)}}
         />
+        </Grid>
         <MUIButton
               fullWidth
               variant="contained"
               onClick={() => { handleSearch();}}
-              sx={{ mt: 10, mb: 2 }}
+              sx={{ mt: 10, mb: 12 }}
               
             >
               Search 
         </MUIButton>
-        </Grid>
-        <Grid container justifyContent="flex-start" style={{paddingBottom:"40px"}}>
+        <Grid container justifyContent="flex-start" >
               <Grid item>
-                  (***Please type in a valid project id***)
+              <Typography component="h6" variant="h6">
+              (***Please type in a valid project id***)
+                    </Typography>
+                  
               </Grid>
         </Grid>
       </Container>

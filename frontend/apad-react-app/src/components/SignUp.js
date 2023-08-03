@@ -35,7 +35,6 @@ export const SignUp = () => {
         APIService.AddUsers({email, password}).then(
           data => {
             setData(data)
-            console.log(data)
             if (data.success) {
               navigate("/dashboard")
             }
@@ -49,9 +48,6 @@ export const SignUp = () => {
 
     //The handleSubmit will be triggered upon clicking the submit button
     const handleSubmit = (event) => {
-    console.log(email)
-    console.log(password)
-    console.log(data)
     addUsers()
     setEmail('')
     setPassword('')
