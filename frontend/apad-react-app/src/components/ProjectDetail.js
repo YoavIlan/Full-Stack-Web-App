@@ -79,45 +79,6 @@ export const ProjectDetail = (_params) => {
                       noValidate
                       sx={{ mt: 1 }}
                     >
-                      {/* <TextField
-                        margin="normal"
-                        variant="standard"
-                        fullWidth
-                        id="Project ID" 
-                        label="Project ID"
-                        name = "Project ID"
-                        value={state.data.data["_id"]}
-                        InputProps={{
-                          readOnly: true,
-                        }}
-                        sx={{ ml: 0.25 }}
-                       
-                      />
-                      <TextField
-                        margin="normal"
-                        variant="standard"
-                        fullWidth
-                        id="Project Name" 
-                        label="Project Name"
-                        name = "Project Name"
-                        value={state.data.data["name"]}
-                        InputProps={{
-                          readOnly: true,
-                        }}
-                        sx={{ ml: 0.25 }}                       
-                      />
-                      <TextField
-                        margin="normal"
-                        variant="standard"
-                        fullWidth
-                        id="Project Description" 
-                        label="Project Description"
-                        name = "Project Description"
-                        value={state.data.data["desc"]}
-                        InputProps={{
-                          readOnly: true,
-                        }}
-                        sx={{ ml: 0.25 }}/>  */}
                         <h2>{state.data.data["name"]}</h2>
                         <h4>{state.data.data["desc"]}</h4>
                       <Grid item xs={11.5} alignt="center">
