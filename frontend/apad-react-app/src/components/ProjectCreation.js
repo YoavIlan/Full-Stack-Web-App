@@ -31,9 +31,8 @@ export const ProjectCreation = () => {
       APIService.CreateProject({_id, name, description}).then(
         data => {
           setData(data)
-          console.log(data)
           if (data.success) {
-            alert(data.message)
+            // alert(data.message)
             // navigate("/dashboard")
             navigate("/project-detail", { state:{data} })
           }
@@ -47,11 +46,7 @@ export const ProjectCreation = () => {
 
   //The handleSubmit will be triggered upon clicking the create project button
   const handleSubmit = (event) => {
-    console.log(_id)
-    console.log(name)
-    console.log(description)
     createProject()
-    console.log(data)
     setId('')
     setName('')
     setDescription('')
