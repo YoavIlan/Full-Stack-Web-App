@@ -28,9 +28,9 @@ export const MUIProjectSearchBar= ({}) => {
       ).then(
         data => {
           setData(data)
-          console.log(data)
+          // console.log(data)
           if(data.success){
-            alert(data.message)
+            // alert(data.message)
             navigate("/project-detail", { state:{data} })
           }
 
@@ -45,7 +45,7 @@ export const MUIProjectSearchBar= ({}) => {
       <Container maxWidth="md" sx={{ mt: 2, width: "100%" }} >
         <Grid>
         <TextField  type="search" id="search" label="Search For Projects"  sx={{width: "100%" }}
-        onChange={(e) => {setProjectID(e.target.value);console.log(e.target.value)}}
+        onChange={(e) => {setProjectID(e.target.value)}}
         />
         </Grid>
         <MUIButton
