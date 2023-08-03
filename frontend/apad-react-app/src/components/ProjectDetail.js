@@ -11,6 +11,7 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
 import MultiCheckInOut from "./MultiCheckInOut";
+import CheckInOut from './CheckInOut';
 
 // Export Login component
 export const ProjectDetail = (_params) => {
@@ -78,7 +79,7 @@ export const ProjectDetail = (_params) => {
                       noValidate
                       sx={{ mt: 1 }}
                     >
-                      <TextField
+                      {/* <TextField
                         margin="normal"
                         variant="standard"
                         fullWidth
@@ -116,10 +117,12 @@ export const ProjectDetail = (_params) => {
                         InputProps={{
                           readOnly: true,
                         }}
-                        sx={{ ml: 0.25 }}/> 
+                        sx={{ ml: 0.25 }}/>  */}
+                        <h2>{state.data.data["name"]}</h2>
+                        <h4>{state.data.data["desc"]}</h4>
                       <Grid item xs={11.5} alignt="center">
 
-                      <MultiCheckInOut/>    
+                      <CheckInOut/>    
                   </Grid>   
                       <Button 
                       onClick={() => { handleCancel();}}
