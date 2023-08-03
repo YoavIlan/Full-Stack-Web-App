@@ -21,7 +21,7 @@ export const MUIProjectSearchBar= ({}) => {
   
     // Handle submit function when the log in button is clicked
     const handleSearch = (e) => {
-      var address = "/api/getproj/"
+      var address = "/api/getproj"
       var id = projectID
       fetch(address+"/"+id).then(
         res => res.json()
